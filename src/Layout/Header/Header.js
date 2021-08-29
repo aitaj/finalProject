@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Switch, Route } from "react-router-dom";
 import Basket from "../../Basket/Basket";
 import SignIn from "../../SignIn/SignIn";
+import Product from '../../Product/Product'
 import { MenuItems } from "./MenuItems";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
@@ -11,9 +12,7 @@ const Header = () => {
   const handleBarClick = () => {
     setClickedBar(!clickedBar);
   };
-  const clickedMainLink = (e) => {
-    console.log(e.target.value);
-  };
+
   return (
     <div id="header">
       <div className="desktop">
@@ -107,21 +106,26 @@ const Header = () => {
         </div>
         <div className="main-bant">
           <div className="container">
-            {" "}
             <div className="row">
               <div className="navigation-active w-100">
-                <ul className="d-flex  w-100 nav-main-ul onClick={clickedMainLink} ">
+                <ul className="d-flex  w-100 nav-main-ul ">
                   {MenuItems.map((item, index) => {
                     return (
                       <li className="category-main">
-                        <a key={index} target="_self" href={item.url} className="main-link">
+                        <Link
+                          key={index}
+                          target="_self"
+                          href={item.url}
+                          className="main-link"
+                          to={item.title}
+                        >
                           <span>{item.title}</span>
-                        </a>
+                        </Link>
                         <ul>
-                          {item.subCategories.map((category) => {
+                          {item.subCategories.map((subCategory) => {
                             return (
                               <li className="subcategory-li">
-                                <a className="subcategory">{category}</a>
+                                <Link to={subCategory} className="subcategory">{subCategory}</Link>
                               </li>
                             );
                           })}

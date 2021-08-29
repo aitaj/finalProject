@@ -120,10 +120,12 @@
         color: $orange !important;
         border-radius: 3px;
       }
-      .main-link.active{
-        
-        background-color: $white;
-      }
+    }
+    .main-link.active {
+      background-color: $white;
+      opacity: 0.7;
+      color: $orange !important;
+      border-radius: 3px;
     }
     .subcategory-li {
       .subcategory {
