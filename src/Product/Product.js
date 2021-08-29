@@ -1,10 +1,13 @@
 import React from "react";
 import { Products } from "./Products";
+import Filter from "../Filter/Filter";
 const Product = () => {
   function beforeDiscount(currentPrice, discount) {
     return (currentPrice * 100) / (100 - discount);
   }
-  let filteredProducts = Products.filter((p) => parseInt(p.discount) > 30);
+
+  let filteredProducts = Products.filter((p) =>p.price);
+
   return (
     <div className="container">
       <div className="row">
@@ -15,20 +18,13 @@ const Product = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col-md-3">
-          <div className="filter">
-            <a className="filter-icon">
-              <i class="fas fa-sort-amount-down mr-3"></i>
-              <span>Filterlə</span>
-            </a>
-          </div>
-        </div>
+        <Filter filteredProducts={filteredProducts} />
         <div className="col-md-9">
           <div className="row">
             {filteredProducts.map((product, index) => {
               return (
                 <div className="col-md-4 col-6">
-                  <div className="product-card">
+                  <div className="product-card mt-2">
                     <div className="custom-card-header">
                       <img className="img-fluid" src={product.photoUrl} />
                     </div>
@@ -46,7 +42,10 @@ const Product = () => {
                             ).toFixed(0)}
                             AZN
                           </p>
-                          <p className="current-price"> {product.price}</p>
+                          <p className="current-price">
+                            {" "}
+                            {product.price.toFixed(2)}AZN
+                          </p>
                         </div>
                         <div className="discount-date">
                           <span>{product.startDiscountDate}-</span>

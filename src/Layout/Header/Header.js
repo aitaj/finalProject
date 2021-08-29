@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Link, Switch, Route } from "react-router-dom";
 import Basket from "../../Basket/Basket";
 import SignIn from "../../SignIn/SignIn";
-import Product from '../../Product/Product'
+import Product from "../../Product/Product";
 import { MenuItems } from "./MenuItems";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 const Header = () => {
   const [clickedBar, setClickedBar] = useState(false);
+
+
   const handleBarClick = () => {
     setClickedBar(!clickedBar);
   };
-
+ 
   return (
     <div id="header">
       <div className="desktop">
-        {" "}
         <div className="container">
           <div className="row">
             <div className="col-md-2">
@@ -125,7 +126,11 @@ const Header = () => {
                           {item.subCategories.map((subCategory) => {
                             return (
                               <li className="subcategory-li">
-                                <Link to={subCategory} className="subcategory">{subCategory}</Link>
+                                <Link
+                                  to={subCategory}
+                                  className="subcategory">
+                                  {subCategory}
+                                </Link>
                               </li>
                             );
                           })}
