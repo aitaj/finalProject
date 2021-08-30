@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Products } from "../Product/Products.js";
-const Filter = () => {
+const Filter = ({ filteredProducts }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [input, setInput] = useState({
     minPrice: 0,
@@ -8,9 +8,8 @@ const Filter = () => {
     minPercent: 0,
     maxPercent: 99,
   });
-  
-  let filteredProducts = Products;
   const [brend, setBrend] = useState(filteredProducts[0].brend);
+  const [currentProducts,setCurrentProducts]=useState([]);
   const handleBrendSelect = (e) => {
     setBrend(e.target.value);
   };
@@ -29,11 +28,12 @@ const Filter = () => {
       (p) => p.price > input.minPrice && p.price < input.maxPrice
     );
     filteredProducts = filteredProducts.filter(
-      (p) => p.discount > input.minDiscount && p.discount < input.maxDiscount
+      (p) => p.discount > input.minPercent && p.discount < input.maxPercent
     );
     filteredProducts = filteredProducts.filter((pr) => pr.brend == brend);
-    console.log(filteredProducts)
+    console.log(filteredProducts);
   };
+  
   return (
     <>
       <div className="col-md-3">

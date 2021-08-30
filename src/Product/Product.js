@@ -6,7 +6,7 @@ const Product = () => {
     return (currentPrice * 100) / (100 - discount);
   }
 
-  let filteredProducts = Products.filter((p) =>p.price);
+  let filteredProducts = Products;
 
   return (
     <div className="container">
@@ -54,7 +54,7 @@ const Product = () => {
                       </a>
                     </div>
                     <div className="discount text-center">
-                      <p>{product.discount}</p>
+                      <p>{product.discount}%</p>
                     </div>
                   </div>
                 </div>

@@ -14,6 +14,9 @@
       box-shadow: 1px 1px 9px $orange;
     }
   }
+  input,select{
+    font-size: 13px;
+  }
   .filter-body {
     display: none;
   }
