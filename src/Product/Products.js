@@ -66,7 +66,7 @@ export const Products = [
     finishDiscountDate:"3 sentyabr",
   },
   {
-    name: "Cilciraq asma tekli",
+    name: "Cilciraq asma tekli5",
     photoUrl: "https://cdn.dsmcdn.com/ty44/product/media/images/20210104/21/45924992/84462904/1/1_org_zoom.jpg",
     category: "Ev esyalari",
     subCategory:"Cilciraqlar",
@@ -77,7 +77,7 @@ export const Products = [
     finishDiscountDate:"3 sentyabr",
   },
   {
-    name: "Cilciraq asma tekli",
+    name: "Cilciraq asma tekli4",
     photoUrl: "https://cdn.dsmcdn.com/ty72/product/media/images/20210325/19/75306201/157487604/0/0_org_zoom.jpg",
     category: "Ev esyalari",
     subCategory:"Cilciraqlar",
@@ -88,7 +88,7 @@ export const Products = [
     finishDiscountDate:"3 sentyabr",
   },
   {
-    name: "Cilciraq asma tekli",
+    name: "Cilciraq asma tekli3",
     photoUrl: "https://cdn.dsmcdn.com/ty72/product/media/images/20210325/19/75306201/157487604/0/0_org_zoom.jpg",
     category: "Ev esyalari",
     subCategory:"Cilciraqlar",

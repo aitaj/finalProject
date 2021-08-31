@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Link, Switch, Route } from "react-router-dom";
 import Basket from "../../Basket/Basket";
-import SignIn from "../../SignIn/SignIn";
 import Product from "../../Product/Product";
+import Signin from "../../Authorization/Signin/Signin";
 import { MenuItems } from "./MenuItems";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import Register from "../../Authorization/Register/Register";
 const Header = () => {
   const [clickedBar, setClickedBar] = useState(false);
-
-
+  const [showModal, setShowModal] = useState(false);
+  const[basketClicked,setBasketClicked]=useState(false);
+  const handleShow = () => {
+    setShowModal(true);
+    console.log(showModal)
+  };
+  const handleCloseModal=()=>{
+    setShowModal(false);
+  }
   const handleBarClick = () => {
     setClickedBar(!clickedBar);
   };
- 
   return (
     <div id="header">
       <div className="desktop">
@@ -91,8 +98,9 @@ const Header = () => {
             <div className="col-md-1">
               <div className="sign-in d-flex justify-content-center flex-column align-items-center h-100">
                 <Link
-                  to="/sign-in"
+                  to="/signin"
                   className="d-flex justify-content-center align-items-center "
+                  onClick={handleShow}
                 >
                   <i className="fas fa-sign-in-alt"></i>
                   <p> Giriş </p>
@@ -100,10 +108,8 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <Switch>
-            <Route path="/basket" component={Basket} />
-            <Route path="/sign-in" component={SignIn} />
-          </Switch>
+       
+        
         </div>
         <div className="main-bant">
           <div className="container">
@@ -126,9 +132,7 @@ const Header = () => {
                           {item.subCategories.map((subCategory) => {
                             return (
                               <li className="subcategory-li">
-                                <Link
-                                  to={subCategory}
-                                  className="subcategory">
+                                <Link to={subCategory} className="subcategory">
                                   {subCategory}
                                 </Link>
                               </li>
@@ -159,7 +163,7 @@ const Header = () => {
             <Link to="/basket">
               <i className="fas  fa-shopping-basket"></i>
             </Link>
-            <Link to="sign-in">
+            <Link to="signin">
               <i className="fas fa-sign-in-alt"></i>
             </Link>
           </div>
@@ -212,7 +216,14 @@ const Header = () => {
           </div>
         </div>
       </div>
+      {showModal &&<Signin closeModal={handleCloseModal} />
+        }
+           <Switch>
+            <Route path="/basket" component={Basket} />
+            <Route path="/register" component={Register} />
+          </Switch>
     </div>
+    
   );
 };
 

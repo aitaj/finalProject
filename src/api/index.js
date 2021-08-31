@@ -1,5 +1,4 @@
-import axios from "axios";
-
+import axios from 'axios'
 export default axios.create({
-  baseURL: "http://logo.az",
-});
+    baseURL:'https://shop-msi.herokuapp.com/api',
+})

@@ -1,6 +1,7 @@
 import React from "react";
 import { Products } from "./Products";
 import Filter from "../Filter/Filter";
+import { Link } from "react-router-dom";
 const Product = () => {
   function beforeDiscount(currentPrice, discount) {
     return (currentPrice * 100) / (100 - discount);
@@ -51,6 +52,7 @@ const Product = () => {
                           <span>{product.startDiscountDate}-</span>
                           <span>{product.finishDiscountDate}</span>
                         </div>
+                        <Link to={`/products/${product.name}`}>Ətraflı</Link>
                       </a>
                     </div>
                     <div className="discount text-center">
