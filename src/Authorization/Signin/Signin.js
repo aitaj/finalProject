@@ -21,9 +21,7 @@ const Signin = ({ closeModal }) => {
   const handleClose = () => {
     setShow(false);
   };
-  useEffect(() => {
-  console.log(show,"test")
-  }, [])
+
   // useEffect(() => {
   //   if (Object.keys(userInfo).length > 0) {
   //     history.push("/");

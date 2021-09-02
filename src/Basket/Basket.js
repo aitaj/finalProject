@@ -7,7 +7,6 @@ const Basket = () => {
     if (count < 1) {
       return;
     }
-
     setCount(count - 1);
   };
   const handleIncrease = (count) => {
@@ -96,8 +95,35 @@ const Basket = () => {
               </div>
             </div>
             <div className="basket-mobile">
-              <div className="basket-header">s</div>
-              <div className="basket-line"></div>
+              {products.map((pr) => {
+                return (
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="basket-header">
+                        <img src={pr.photoUrl} className="img-fluid" />
+                      </div>
+                      <div className="basket-row-body text-center">
+                        <h5 className='mt-2'>{pr.name}</h5>
+                        <p className='mt-2 mb-2'>Endirim:{pr.discount}%</p>
+                        <p>Qiymət:{pr.price}AZN</p>
+                        <div className="amount d-flex w-100 mt-2 mb-2">
+                          <a onClick={() => handleDecrease(count)}>-</a>
+                          <span>{count}</span>
+                          <a onClick={() => handleIncrease(count)}>+</a>
+                        </div>
+                        <p >
+                          {(pr.price * count).toFixed(2)}
+                        </p>
+                        <p >
+                          <a onClick={handleRemoveItem} className={pr.name}>
+                            <i className="fas fa-times"></i>
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

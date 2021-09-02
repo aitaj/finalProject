@@ -5,8 +5,6 @@ import Product from "../../Product/Product";
 import Signin from "../../Authorization/Signin/Signin";
 import { MenuItems } from "./MenuItems";
 import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
 import Register from "../../Authorization/Register/Register";
 const Header = () => {
   const [clickedBar, setClickedBar] = useState(false);
@@ -223,7 +221,6 @@ const Header = () => {
             <Route path="/register" component={Register} />
           </Switch>
     </div>
-    
   );
 };
 
