@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, combineReducers, Store } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { signinReducer } from "../Authorization/Signin/reducers/index";
-
-
+import { categoryReducer } from "../admin/pages/Category/reducers";
+import { sizeReducer } from "../admin/pages/Size/reducers";
 
 // const userInfoFromLocalStorage = localStorage.getItem("userInfo")
 //   ? JSON.parse(localStorage.getItem("userInfo"))
@@ -15,6 +15,8 @@ import { signinReducer } from "../Authorization/Signin/reducers/index";
 
 const reducers = combineReducers({
   userInfo: signinReducer,
+  categories: categoryReducer,
+  sizes: sizeReducer,
 });
 
 const store = createStore(

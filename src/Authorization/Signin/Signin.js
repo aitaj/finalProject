@@ -3,7 +3,8 @@ import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { loginUser } from "../Signin/actions";
 import { useSelector, useDispatch } from "react-redux";
-
+import Header from "../../Layout/Header/Header";
+import Footer from "../../Layout/Footer/Footer";
 const Signin = ({ closeModal }) => {
   const [show, setShow] = useState(true);
   const [user, setUser] = useState({
@@ -40,6 +41,8 @@ const Signin = ({ closeModal }) => {
   };
 
   return (
+    <>
+    <Header/>
     <Container className="mt-5">
       <Row>
         <Col md={6}>
@@ -96,6 +99,8 @@ const Signin = ({ closeModal }) => {
         </Col>
       </Row>
     </Container>
+    <Footer/>
+    </>
   );
 };
 

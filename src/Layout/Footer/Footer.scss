@@ -49,9 +49,14 @@
   ul {
     a {
       color: $gray !important;
+      transition: all 0.3;
+      &:hover {
+        color: $white !important;
+      }
     }
     p {
       margin: 5px !important;
+      font-size: 15px !important;
     }
   }
   h5 {

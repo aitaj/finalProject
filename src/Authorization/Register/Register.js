@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { userRegister } from "../Register/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import Header from "../../Layout/Header/Header";
+import Footer from "../../Layout/Footer/Footer";
 const Register = () => {
   const [user, setUser] = useState({
     name: "",
@@ -31,6 +33,7 @@ const Register = () => {
   };
   return (
     <>
+      {/* <Header /> */}
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-6">
@@ -84,6 +87,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+      {/* <Footer /> */}
     </>
   );
 };

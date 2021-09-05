@@ -3,6 +3,8 @@ import { Products } from "./Products";
 import Filter from "../Filter/Filter";
 import { Link } from "react-router-dom";
 import OwlCarousel from "react-owl-carousel";
+import Header from "../Layout/Header/Header";
+import Footer from "../Layout/Footer/Footer";
 const ProductDetails = () => {
   useEffect(() => {
     let thumbnails = document.getElementsByClassName("thumbnail");
@@ -135,6 +137,7 @@ const ProductDetails = () => {
 
   return (
     <>
+      <Header />
       <div className="row">
         <div className="col-12">
           <h3 className="text-center my-4">Product name</h3>
@@ -239,6 +242,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
