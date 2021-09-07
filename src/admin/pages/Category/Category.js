@@ -13,10 +13,8 @@ export default function Category() {
 
   useEffect(() => {
     const getPosts = async () => {
-      const {data} =await API.get("/sizes");
-      // setPosts(data);
-      
-    console.log(data);
+      const { data } = await API.get("/categories");
+      console.log(data);
     };
 
     getPosts();

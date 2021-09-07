@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { addSize, editSize } from "./actions";
+import { addLocation, editLocation } from "./actions";
 import { useDispatch } from "react-redux";
-const ModalSize = ({ showModal, closeModal, item }) => {
-  var date = new Date();
-  date.setHours(date.getHours() + 4);
-  var isodate = date.toISOString();
-
+const ModalLocation = ({ readonly, closeModal, item }) => {
   const [formData, setFormData] = useState({
     id: 0,
     name: "",
-    abbrName: "",
     createdByUserId: 1,
-    createdDate: isodate,
+    createdDate: new Date().toISOString(),
     deletedByUserId: null,
     deletedDate: null,
     productId: null,
@@ -24,7 +19,6 @@ const ModalSize = ({ showModal, closeModal, item }) => {
       setFormData({
         id: item.id,
         name: item.name,
-        abbrName: item.abbrName,
         createdByUserId: 1,
         createdDate: new Date(new Date().toLocaleDateString()).toISOString(),
         deletedByUserId: null,
@@ -39,12 +33,13 @@ const ModalSize = ({ showModal, closeModal, item }) => {
     setFormData({ ...formData, [field]: e.target.value });
   };
 
-  const handleActionSize = () => {
+  const handleActionLocation = () => {
     closeModal();
     if (Object.keys(item).length > 0) {
-      dispatch(editSize(formData));
+      dispatch(editLocation(formData));
     } else {
-      dispatch(addSize(formData));
+      dispatch(addLocation(formData));
+      console.log(formData);
     }
   };
   return (
@@ -53,7 +48,7 @@ const ModalSize = ({ showModal, closeModal, item }) => {
         <Modal show={true} onHide={closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>
-              {Object.keys(item).length > 0 ? "Update" : "Add"} Size
+              {Object.keys(item).length > 0 ? "Update" : "Add"} Location
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -65,22 +60,16 @@ const ModalSize = ({ showModal, closeModal, item }) => {
                 placeholder="name"
                 value={formData.name}
                 onChange={(e) => handleChangeInp(e, "name")}
+                readOnly
               />
-              <input
-                type="text"
-                name="abbrName"
-                className="form-control my-3"
-                placeholder="Abbretiation"
-                value={formData.abbrName}
-                onChange={(e) => handleChangeInp(e, "abbrName")}
-              />
+              
             </form>
           </Modal.Body>
           <Modal.Footer>
             <Button
               className="btn-add"
               variant="primary"
-              onClick={handleActionSize}
+              onClick={handleActionLocation}
             >
               {Object.keys(item).length > 0 ? "Update" : "Add"}
             </Button>
@@ -98,4 +87,4 @@ const ModalSize = ({ showModal, closeModal, item }) => {
   );
 };
 
-export default ModalSize;
+export default ModalLocation;

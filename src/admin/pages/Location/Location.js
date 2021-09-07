@@ -3,30 +3,30 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSizes, deleteSize } from "./actions/index";
-import ModalSize from "./ModalSize";
-export default function Size() {
-  const { sizes } = useSelector((state) => state.sizes);
+import { fetchLocations, deleteLocation } from "./actions/index";
+import ModalLocation from "./ModalLocation";
+export default function Location() {
+  const { locations } = useSelector((state) => state.locations);
   const [showModal, setShowModal] = useState(false);
-  const [sizeItem, setSizeItem] = useState({});
+  const [locationItem, setLocationItem] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchSizes());
+    dispatch(fetchLocations());
   }, []);
   const handleDelete = (id) => {
-    dispatch(deleteSize(id));
+    dispatch(deleteLocation(id));
   };
   const handleEditSize = (size) => {
-    setSizeItem(size);
+    setLocationItem(size);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setSizeItem({});
+    setLocationItem({});
   };
 
-  const handleAddSize = () => {
+  const handleAddLocation = () => {
     setShowModal(true);
   };
   return (
@@ -46,36 +46,34 @@ export default function Size() {
             {" "}
             <div className="product">
               <div className="productTitleContainer">
-                <h1 className="productTitle">Sizes</h1>
+                <h1 className="productTitle">Locations</h1>
                 <Link>
-                  <button onClick={handleAddSize} className="productAddButton">
+                  <button
+                    onClick={handleAddLocation}
+                    className="productAddButton"
+                  >
                     Create New
                   </button>
                 </Link>
               </div>
               <div className="sizes my-4">
                 <ul>
-                  {sizes.map((size, index) => {
+                  {locations.map((location, index) => {
                     return (
                       <li>
                         <div className="wrapper d-flex justify-content-between">
-                          <p>{size.name}</p>
+                          <p>{location.name}</p>
                           <div className="btns-wrapper">
                             <a
-                              onClick={() => handleEditSize(size)}
+                              onClick={() => handleEditSize(location)}
                               className="edit"
                             >
                               Edit
                             </a>
-                            <Link to={`/admin/sizes/${size.id}`}
-                              
-                              className="details"
-                            >
-                              Details
-                            </Link>
+                            <a className="details">Details</a>
                             <a
                               onClick={() => {
-                                handleDelete(size.id);
+                                handleDelete(location.id);
                               }}
                               className="delete"
                             >
@@ -93,7 +91,10 @@ export default function Size() {
         </div>
       </div>
       {showModal && (
-        <ModalSize  closeModal={handleCloseModal} item={sizeItem}></ModalSize>
+        <ModalLocation
+          closeModal={handleCloseModal}
+          item={locationItem}
+        ></ModalLocation>
       )}
     </>
   );
