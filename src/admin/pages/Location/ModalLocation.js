@@ -4,13 +4,11 @@ import { addLocation, editLocation } from "./actions";
 import { useDispatch } from "react-redux";
 const ModalLocation = ({ readonly, closeModal, item }) => {
   const [formData, setFormData] = useState({
-    id: 0,
     name: "",
     createdByUserId: 1,
     createdDate: new Date().toISOString(),
     deletedByUserId: null,
     deletedDate: null,
-    productId: null,
   });
   const dispatch = useDispatch();
 
@@ -21,9 +19,8 @@ const ModalLocation = ({ readonly, closeModal, item }) => {
         name: item.name,
         createdByUserId: 1,
         createdDate: new Date(new Date().toLocaleDateString()).toISOString(),
-        deletedByUserId: null,
-        deletedDate: null,
-        productId: null,
+        deletedByUserId: item.deletedByUserId,
+        deletedDate: item.deletedDate,
       });
     }
     console.log(new Date().toLocaleDateString(), item);
@@ -39,7 +36,6 @@ const ModalLocation = ({ readonly, closeModal, item }) => {
       dispatch(editLocation(formData));
     } else {
       dispatch(addLocation(formData));
-      console.log(formData);
     }
   };
   return (
@@ -60,9 +56,7 @@ const ModalLocation = ({ readonly, closeModal, item }) => {
                 placeholder="name"
                 value={formData.name}
                 onChange={(e) => handleChangeInp(e, "name")}
-                readOnly
               />
-              
             </form>
           </Modal.Body>
           <Modal.Footer>

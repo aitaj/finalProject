@@ -3,30 +3,30 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSizes, deleteSize } from "./actions/index";
-import ModalSize from "./ModalSize";
-export default function Size() {
-  const { sizes } = useSelector((state) => state.sizes);
+import { deleteSubcategory, fetchSubcategories } from "./actions/index";
+import ModalSubcategory from "./ModalSubcategory";
+export default function Subcategory() {
+  const { subcategories } = useSelector((state) => state.subcategories);
   const [showModal, setShowModal] = useState(false);
-  const [sizeItem, setSizeItem] = useState({});
+  const [subcategory, setSubcategory] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchSizes());
+    dispatch(fetchSubcategories());
   }, []);
   const handleDelete = (id) => {
-    dispatch(deleteSize(id));
+    dispatch(deleteSubcategory(id));
   };
-  const handleEditSize = (size) => {
-    setSizeItem(size);
+  const handleEdit = (item) => {
+    setSubcategory(item);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setSizeItem({});
+    setSubcategory({});
   };
 
-  const handleAddSize = () => {
+  const handleAdd = () => {
     setShowModal(true);
   };
   return (
@@ -46,9 +46,9 @@ export default function Size() {
             {" "}
             <div className="product">
               <div className="productTitleContainer">
-                <h3 className="productTitle my-3">Bütün ölçülər</h3>
+                <h3 className="productTitle my-3">Bütün alt kateqoriyalar</h3>
                 <Link>
-                  <button onClick={handleAddSize} className="productAddButton">
+                  <button onClick={handleAdd} className="productAddButton">
                     Yenisini yarat
                   </button>
                 </Link>
@@ -60,27 +60,27 @@ export default function Size() {
                       <h5>Ad</h5>
                     </div>
                   </li>
-                  {sizes.map((size, index) => {
+                  {subcategories.map((subcategory, index) => {
                     return (
                       <li>
                         <div className="wrapper d-flex justify-content-between">
-                          <p>{size.name}</p>
+                          <p>{subcategory.name}</p>
                           <div className="btns-wrapper">
                             <a
-                              onClick={() => handleEditSize(size)}
+                              onClick={() => handleEdit(subcategory)}
                               className="edit"
                             >
                               Yenilə
                             </a>
                             <Link
-                              to={`/admin/sizes/${size.id}`}
+                              to={`/admin/subcategories/${subcategory.id}`}
                               className="details"
                             >
                               Detallar
                             </Link>
                             <a
                               onClick={() => {
-                                handleDelete(size.id);
+                                handleDelete(subcategory.id);
                               }}
                               className="delete"
                             >
@@ -98,7 +98,10 @@ export default function Size() {
         </div>
       </div>
       {showModal && (
-        <ModalSize closeModal={handleCloseModal} item={sizeItem}></ModalSize>
+        <ModalSubcategory
+          closeModal={handleCloseModal}
+          item={subcategory}
+        ></ModalSubcategory>
       )}
     </>
   );

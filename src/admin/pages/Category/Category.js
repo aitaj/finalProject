@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "./actions";
 import API from "./api/index";
 export default function Category() {
-  // const { categories } = useSelector((state) => state.categories);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const getPosts = async () => {

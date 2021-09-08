@@ -4,24 +4,22 @@ import API from "./api/index";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import { Link } from "react-router-dom";
-const SizeDetailed = () => {
-  const [size, setSize] = useState({});
+
+const LocationDetailed = () => {
+  const [locationItem, setLocationItem] = useState({});
   const { id } = useParams();
   let location = useLocation();
-
   const useQuery = () => {
     return new URLSearchParams(location.search);
   };
-
   let query = useQuery();
   useEffect(() => {
-    const getSize = async () => {
-      const { data } = await API.get(`/sizes/${id}`);
-      setSize(data);
+    const getLocation = async () => {
+      const { data } = await API.get(`/locations/${id}`);
+      setLocationItem(data);
     };
-    getSize();
+    getLocation();
   }, []);
-
   return (
     <>
       <div className="row">
@@ -40,10 +38,9 @@ const SizeDetailed = () => {
             <div className="product">
               <div className="productTitleContainer">
                 <h3 className="productTitle my-3">Detallı məlumat</h3>
-                <p className="productTitle">Ad :{size.name}</p>
-                <p className="productTitle">Qısa Ad :{size.abbrName}</p>
+                <p className="productTitle">Ad :{locationItem.name}</p>
                 <div className="btns-wrapper">
-                  <Link to={`/admin/sizes`} className="edit">
+                  <Link to={`/admin/locations`} className="edit">
                     Siyahıya Qayıt
                   </Link>
                 </div>
@@ -56,4 +53,4 @@ const SizeDetailed = () => {
   );
 };
 
-export default SizeDetailed;
+export default LocationDetailed;

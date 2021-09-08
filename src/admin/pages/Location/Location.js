@@ -46,18 +46,24 @@ export default function Location() {
             {" "}
             <div className="product">
               <div className="productTitleContainer">
-                <h1 className="productTitle">Locations</h1>
+                <h3 className="productTitle  my-3">Bütün location-lar</h3>
                 <Link>
                   <button
                     onClick={handleAddLocation}
                     className="productAddButton"
                   >
-                    Create New
+                    Yenisini yarat
                   </button>
                 </Link>
               </div>
               <div className="sizes my-4">
                 <ul>
+                  {" "}
+                  <li>
+                    <div className="wrapper d-flex justify-content-between header-list mb-3">
+                      <h5>Ad</h5>
+                    </div>
+                  </li>
                   {locations.map((location, index) => {
                     return (
                       <li>
@@ -68,16 +74,21 @@ export default function Location() {
                               onClick={() => handleEditSize(location)}
                               className="edit"
                             >
-                              Edit
+                              Yenilə
                             </a>
-                            <a className="details">Details</a>
+                            <Link
+                              to={`/admin/locations/${location.id}`}
+                              className="details"
+                            >
+                              Detallar
+                            </Link>
                             <a
                               onClick={() => {
                                 handleDelete(location.id);
                               }}
                               className="delete"
                             >
-                              Delete
+                              Sil
                             </a>
                           </div>
                         </div>

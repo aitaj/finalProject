@@ -7,6 +7,9 @@ import Category from "./admin/pages/Category/Category";
 import HomeAdmin from "./admin/pages/Home/HomeAdmin";
 import Size from "./admin/pages/Size/Size";
 import Location from "./admin/pages/Location/Location";
+import Subcategory from "./admin/pages/Subcategory/Subcategory";
+import SizeDetailed from "./admin/pages/Size/SizeDetailed";
+import LocationDetailed from "./admin/pages/Location/LocationDetailed";
 function App() {
   return (
     <>
@@ -18,8 +21,15 @@ function App() {
           <Route path="/product/id" component={ProductDetails}></Route>
           <Route exact path="/admin/" component={HomeAdmin}></Route>
           <Route path="/admin/categories" component={Category}></Route>
-          <Route path="/admin/sizes" component={Size}></Route>
-          <Route path="/admin/locations" component={Location}></Route>
+          <Route exact path="/admin/sizes" component={Size}></Route>
+          <Route exact path="/admin/locations" component={Location}></Route>
+          <Route
+            exact
+            path="/admin/subcategories"
+            component={Subcategory}
+          ></Route>
+          <Route path={`/admin/sizes/:id`} component={SizeDetailed} />
+          <Route path={`/admin/locations/:id`} component={LocationDetailed} />
         </Switch>
       </Router>
     </>
