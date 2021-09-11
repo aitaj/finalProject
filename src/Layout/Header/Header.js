@@ -6,17 +6,27 @@ import Signin from "../../Authorization/Signin/Signin";
 import { MenuItems } from "./MenuItems";
 import OwlCarousel from "react-owl-carousel";
 import Register from "../../Authorization/Register/Register";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSubcategories } from "../../admin/pages/Subcategory/actions/index";
+import { fetchCategories } from "../../admin/pages/Category/actions/index";
 const Header = () => {
   const [clickedBar, setClickedBar] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const[basketClicked,setBasketClicked]=useState(false);
+  const [basketClicked, setBasketClicked] = useState(false);
+  const { subcategories } = useSelector((state) => state.subcategories);
+  const { categories } = useSelector((state) => state.categories);
+  // const [subcategory, setSubcategory] = useState({});
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchSubcategories());
+    dispatch(fetchCategories());
+  }, []);
   const handleShow = () => {
     setShowModal(true);
-    console.log(showModal)
   };
-  const handleCloseModal=()=>{
+  const handleCloseModal = () => {
     setShowModal(false);
-  }
+  };
   const handleBarClick = () => {
     setClickedBar(!clickedBar);
   };
@@ -106,36 +116,38 @@ const Header = () => {
               </div>
             </div>
           </div>
-       
-        
         </div>
         <div className="main-bant">
           <div className="container">
             <div className="row">
               <div className="navigation-active w-100">
                 <ul className="d-flex  w-100 nav-main-ul ">
-                  {MenuItems.map((item, index) => {
+                  {categories.map((item, index) => {
                     return (
                       <li className="category-main">
                         <Link
                           key={index}
                           target="_self"
-                          href={item.url}
                           className="main-link"
-                          to={item.title}
+                          to={`${item.name}`}
                         >
-                          <span>{item.title}</span>
+                          <span>{item.name}</span>
                         </Link>
                         <ul>
-                          {item.subCategories.map((subCategory) => {
-                            return (
-                              <li className="subcategory-li">
-                                <Link to={subCategory} className="subcategory">
-                                  {subCategory}
-                                </Link>
-                              </li>
-                            );
-                          })}
+                          {subcategories
+                            .filter((s) => s.categoryId == item.id)
+                            .map((subCategory) => {
+                              return (
+                                <li className="subcategory-li">
+                                  <Link
+                              to={`category:${item.name}/subcategory:${subCategory.name}`}
+                                    className="subcategory"
+                                  >
+                                    {subCategory.name}
+                                  </Link>
+                                </li>
+                              );
+                            })}
                         </ul>
                       </li>
                     );
@@ -214,12 +226,11 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {showModal &&<Signin closeModal={handleCloseModal} />
-        }
-           <Switch>
-            <Route path="/basket" component={Basket} />
-            <Route path="/register" component={Register} />
-          </Switch>
+      {showModal && <Signin closeModal={handleCloseModal} />}
+      <Switch>
+        <Route path="/basket" component={Basket} />
+        <Route path="/register" component={Register} />
+      </Switch>
     </div>
   );
 };

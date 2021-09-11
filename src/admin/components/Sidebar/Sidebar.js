@@ -47,10 +47,28 @@ export default function Sidebar() {
                 Locations
                 </li>
               </Link>
-              <Link to="/products" className="link">
+              <Link to="/admin/subcategories" className="link">
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
-                  Products
+                  Subcategories
+                </li>
+              </Link>
+              <Link to="/admin/brends" className="link">
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Brends
+                </li>
+              </Link>
+              <Link to="/admin/colours" className="link">
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Colours
+                </li>
+              </Link>
+              <Link to="/admin/materials" className="link">
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Materials
                 </li>
               </Link>
             </ul>

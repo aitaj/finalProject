@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { addSubcategory, editSubcategory } from "./actions";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories } from "../Category/actions/index";
-const ModalSubcategory = ({ closeModal, item }) => {
+import { addColour, editColour } from "./actions";
+import { useDispatch } from "react-redux";
+const ModalColour = ({ closeModal, item }) => {
   var date = new Date();
   date.setHours(date.getHours() + 4);
   var isodate = date.toISOString();
-  const [select, setSelect] = useState(0);
-  const { categories } = useSelector((state) => state.categories);
+
   const [formData, setFormData] = useState({
     name: "",
     createdByUserId: 1,
@@ -23,32 +21,25 @@ const ModalSubcategory = ({ closeModal, item }) => {
       setFormData({
         id: item.id,
         name: item.name,
-        categoryId: item.categoryId,
         createdByUserId: item.createdByUserId,
         createdDate: item.createdDate,
         deletedByUserId: item.deletedByUserId,
         deletedDate: item.deletedDate,
       });
     }
-
-    dispatch(fetchCategories());
   }, []);
 
   const handleChangeInp = (e, field) => {
-    setFormData({ ...formData, [field]: e.target.value, categoryId: select });
+    setFormData({ ...formData, [field]: e.target.value });
   };
 
   const handleAction = () => {
     closeModal();
     if (Object.keys(item).length > 0) {
-      dispatch(editSubcategory(formData));
+      dispatch(editColour(formData));
     } else {
-      dispatch(addSubcategory(formData));
+      dispatch(addColour(formData));
     }
-  };
-  const handleSelect = (e) => {
-    setSelect(parseInt(e.target.value));
-    setFormData({ ...formData, categoryId: select });
   };
   return (
     <>
@@ -56,19 +47,11 @@ const ModalSubcategory = ({ closeModal, item }) => {
         <Modal show={true} onHide={closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>
-              {Object.keys(item).length > 0 ? "Update" : "Add"} Size
+              {Object.keys(item).length > 0 ? "Update" : "Add"} Rəng
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form>
-              <select className="mb-3" onChange={handleSelect}>
-                <option selected disabled value="Categories">
-                  Kategoriyalar
-                </option>
-                {categories.map((cat) => (
-                  <option value={cat.id}>{cat.name}</option>
-                ))}
-              </select>
               <input
                 type="text"
                 name="name"
@@ -101,4 +84,4 @@ const ModalSubcategory = ({ closeModal, item }) => {
   );
 };
 
-export default ModalSubcategory;
+export default ModalColour;

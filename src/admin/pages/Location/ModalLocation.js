@@ -17,8 +17,8 @@ const ModalLocation = ({ readonly, closeModal, item }) => {
       setFormData({
         id: item.id,
         name: item.name,
-        createdByUserId: 1,
-        createdDate: new Date(new Date().toLocaleDateString()).toISOString(),
+        createdByUserId: item.createdByUserId,
+        createdDate: item.createdDate,
         deletedByUserId: item.deletedByUserId,
         deletedDate: item.deletedDate,
       });

@@ -23,8 +23,8 @@ const ModalSize = ({ showModal, closeModal, item }) => {
         id: item.id,
         name: item.name,
         abbrName: item.abbrName,
-        createdByUserId: 0,
-        createdDate: new Date(new Date().toLocaleDateString()).toISOString(),
+        createdByUserId: item.createdByUserId,
+        createdDate: item.createdDate,
         deletedByUserId: item.deletedByUserId,
         deletedDate: item.deletedDate,
       });

@@ -4,26 +4,22 @@ import API from "./api/index";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import { Link } from "react-router-dom";
-import { fetchCategories } from "../Category/actions/index";
-import { useDispatch, useSelector } from "react-redux";
-const SubcategoryDetailed = () => {
-  const [subcategory, setSubcategory] = useState({});
+const ColourDetailed = () => {
+  const [colour, setColour] = useState({});
   const { id } = useParams();
   let location = useLocation();
+
   const useQuery = () => {
     return new URLSearchParams(location.search);
   };
-  const { categories } = useSelector((state) => state.categories);
-  const dispatch = useDispatch();
+
   let query = useQuery();
   useEffect(() => {
-    const getSubcategory = async () => {
-      const { data } = await API.get(`/subcategories/${id}`);
-      setSubcategory(data);
+    const getColour = async () => {
+      const { data } = await API.get(`/colours/${id}`);
+      setColour(data);
     };
-    getSubcategory();
-    
-    dispatch(fetchCategories())
+    getColour();
   }, []);
 
   return (
@@ -44,9 +40,9 @@ const SubcategoryDetailed = () => {
             <div className="product">
               <div className="productTitleContainer">
                 <h3 className="productTitle my-3">Detallı məlumat</h3>
-                <p className="productTitle">Ad :{subcategory.name}</p>
+                <p className="productTitle">Ad :{colour.name}</p>
                 <div className="btns-wrapper">
-                  <Link to={`/admin/subcategories`} className="edit">
+                  <Link to={`/admin/colours`} className="edit">
                     Siyahıya Qayıt
                   </Link>
                 </div>
@@ -59,4 +55,4 @@ const SubcategoryDetailed = () => {
   );
 };
 
-export default SubcategoryDetailed;
+export default ColourDetailed;

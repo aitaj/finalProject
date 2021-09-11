@@ -7,9 +7,17 @@ import Category from "./admin/pages/Category/Category";
 import HomeAdmin from "./admin/pages/Home/HomeAdmin";
 import Size from "./admin/pages/Size/Size";
 import Location from "./admin/pages/Location/Location";
+import Brend from "./admin/pages/Brend/Brend";
 import Subcategory from "./admin/pages/Subcategory/Subcategory";
 import SizeDetailed from "./admin/pages/Size/SizeDetailed";
 import LocationDetailed from "./admin/pages/Location/LocationDetailed";
+import SubcategoryDetailed from "./admin/pages/Subcategory/SubcategoryDetailed";
+import BrendDetailed from "./admin/pages/Brend/BrendDetailed";
+import ColourDetailed from "./admin/pages/Colour/ColourDetailed";
+import MaterialDetailed from "./admin/pages/Material/MaterialDetailed";
+import CategoryDetailed from "./admin/pages/Category/CategoryDetailed";
+import Colour from "./admin/pages/Colour/Colour";
+import Material from "./admin/pages/Material/Material";
 function App() {
   return (
     <>
@@ -20,9 +28,12 @@ function App() {
           <Route path="/register" component={Register}></Route>
           <Route path="/product/id" component={ProductDetails}></Route>
           <Route exact path="/admin/" component={HomeAdmin}></Route>
-          <Route path="/admin/categories" component={Category}></Route>
+          <Route exact path="/admin/categories" component={Category}></Route>
           <Route exact path="/admin/sizes" component={Size}></Route>
           <Route exact path="/admin/locations" component={Location}></Route>
+          <Route exact path="/admin/brends" component={Brend}></Route>
+          <Route exact path="/admin/colours" component={Colour}></Route>
+          <Route exact path="/admin/materials" component={Material}></Route>
           <Route
             exact
             path="/admin/subcategories"
@@ -30,6 +41,31 @@ function App() {
           ></Route>
           <Route path={`/admin/sizes/:id`} component={SizeDetailed} />
           <Route path={`/admin/locations/:id`} component={LocationDetailed} />
+          <Route
+            exact
+            path="/admin/subcategories/:id"
+            component={SubcategoryDetailed}
+          ></Route>
+          <Route
+            exact
+            path="/admin/brends/:id"
+            component={BrendDetailed}
+          ></Route>
+          <Route
+            exact
+            path="/admin/colours/:id"
+            component={ColourDetailed}
+          ></Route>
+          <Route
+            exact
+            path="/admin/materials/:id"
+            component={MaterialDetailed}
+          ></Route>
+          <Route
+            exact
+            path="/admin/categories/:id"
+            component={CategoryDetailed}
+          ></Route>
         </Switch>
       </Router>
     </>

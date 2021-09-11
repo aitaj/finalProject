@@ -3,33 +3,32 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSubcategory, fetchSubcategories } from "./actions/index";
-import ModalSubcategory from "./ModalSubcategory";
-export default function Subcategory() {
-  const { subcategories } = useSelector((state) => state.subcategories);
+import { deleteMaterial, fetchMaterials } from "./actions/index";
+import ModalMaterial from "./ModalMaterial";
+export default function Material() {
+  const { materials } = useSelector((state) => state.materials);
   const [showModal, setShowModal] = useState(false);
-  const [subcategory, setSubcategory] = useState({});
+  const [material, setMaterial] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchSubcategories());
+    dispatch(fetchMaterials());
   }, []);
   const handleDelete = (id) => {
-    dispatch(deleteSubcategory(id));
+    dispatch(deleteMaterial(id));
   };
-  const handleEdit = (item) => {
-    setSubcategory(item);
+  const handleEdit = (size) => {
+    setMaterial(size);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setSubcategory({});
+    setMaterial({});
   };
 
   const handleAdd = () => {
     setShowModal(true);
   };
-
   return (
     <>
       <div className="row">
@@ -47,7 +46,7 @@ export default function Subcategory() {
             {" "}
             <div className="product">
               <div className="productTitleContainer">
-                <h3 className="productTitle my-3">Bütün alt kateqoriyalar</h3>
+                <h3 className="productTitle my-3">Bütün materiallar</h3>
                 <Link>
                   <button onClick={handleAdd} className="productAddButton">
                     Yenisini yarat
@@ -61,28 +60,27 @@ export default function Subcategory() {
                       <h5>Ad</h5>
                     </div>
                   </li>
-                  {subcategories.map((subcategory, index) => {
+                  {materials.map((material, index) => {
                     return (
                       <li>
                         <div className="wrapper d-flex justify-content-between">
-                          <p>{subcategory.name}</p>
-                          <span>{subcategory.categoryId}</span>
+                          <p>{material.name}</p>
                           <div className="btns-wrapper">
                             <a
-                              onClick={() => handleEdit(subcategory)}
+                              onClick={() => handleEdit(material)}
                               className="edit"
                             >
                               Yenilə
                             </a>
                             <Link
-                              to={`/admin/subcategories/${subcategory.id}`}
+                              to={`/admin/materials/${material.id}`}
                               className="details"
                             >
                               Detallar
                             </Link>
                             <a
                               onClick={() => {
-                                handleDelete(subcategory.id);
+                                handleDelete(material.id);
                               }}
                               className="delete"
                             >
@@ -100,10 +98,10 @@ export default function Subcategory() {
         </div>
       </div>
       {showModal && (
-        <ModalSubcategory
+        <ModalMaterial
           closeModal={handleCloseModal}
-          item={subcategory}
-        ></ModalSubcategory>
+          item={material}
+        ></ModalMaterial>
       )}
     </>
   );
