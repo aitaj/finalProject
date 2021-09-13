@@ -4,8 +4,6 @@ import {
   TrendingUp,
   PermIdentity,
   Storefront,
-  AttachMoney,
-  BarChart,
   MailOutline,
   DynamicFeed,
   ChatBubbleOutline,
@@ -69,6 +67,12 @@ export default function Sidebar() {
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
                   Materials
+                </li>
+              </Link>
+              <Link to="/admin/products" className="link">
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Products
                 </li>
               </Link>
             </ul>

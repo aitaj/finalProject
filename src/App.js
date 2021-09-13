@@ -16,8 +16,12 @@ import BrendDetailed from "./admin/pages/Brend/BrendDetailed";
 import ColourDetailed from "./admin/pages/Colour/ColourDetailed";
 import MaterialDetailed from "./admin/pages/Material/MaterialDetailed";
 import CategoryDetailed from "./admin/pages/Category/CategoryDetailed";
+import ProductDetailed from "./admin/pages/Product/ProductDetailed";
+import ProductImageDetailed from "./admin/pages/ProductImage/ProductImageDetailed";
 import Colour from "./admin/pages/Colour/Colour";
 import Material from "./admin/pages/Material/Material";
+import Product from "./admin/pages/Product/Product";
+import ProductImage from "./admin/pages/ProductImage/ProductImage";
 function App() {
   return (
     <>
@@ -34,6 +38,12 @@ function App() {
           <Route exact path="/admin/brends" component={Brend}></Route>
           <Route exact path="/admin/colours" component={Colour}></Route>
           <Route exact path="/admin/materials" component={Material}></Route>
+          <Route exact path="/admin/products" component={Product}></Route>
+          <Route
+            exact
+            path="/admin/productimages"
+            component={ProductImage}
+          ></Route>
           <Route
             exact
             path="/admin/subcategories"
@@ -65,6 +75,16 @@ function App() {
             exact
             path="/admin/categories/:id"
             component={CategoryDetailed}
+          ></Route>
+          <Route
+            exact
+            path="/admin/products/:id"
+            component={ProductDetailed}
+          ></Route>
+          <Route
+            exact
+            path="/admin/productimages/:id"
+            component={ProductImageDetailed}
           ></Route>
         </Switch>
       </Router>

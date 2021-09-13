@@ -9,6 +9,8 @@ import { subcategoryReducer } from "../admin/pages/Subcategory/reducers";
 import { brendReducer } from "../admin/pages/Brend/reducers";
 import { colourReducer } from "../admin/pages/Colour/reducers";
 import { materialReducer } from "../admin/pages/Material/reducers";
+import { productReducer } from "../admin/pages/Product/reducers";
+import { productImageReducer } from "../admin/pages/ProductImage/reducers";
 
 // const userInfoFromLocalStorage = localStorage.getItem("userInfo")
 //   ? JSON.parse(localStorage.getItem("userInfo"))
@@ -27,11 +29,12 @@ const reducers = combineReducers({
   brends: brendReducer,
   colours: colourReducer,
   materials: materialReducer,
+  products: productReducer,
+  productImages:productImageReducer,
 });
 
 const store = createStore(
   reducers,
-  // initialState,
   composeWithDevTools(applyMiddleware(thunk))
 );
 

@@ -35,9 +35,15 @@ const ModalSubcategory = ({ closeModal, item }) => {
   }, []);
 
   const handleChangeInp = (e, field) => {
-    setFormData({ ...formData, [field]: e.target.value, categoryId: select });
+    setFormData({ ...formData, [field]: e.target.value , categoryId: select});
+    console.log(formData)
   };
 
+  const handleSelect = (e) => {
+    setSelect(parseInt(e.target.value));
+    setFormData({ ...formData, categoryId: select });
+    console.log(formData)
+  };
   const handleAction = () => {
     closeModal();
     if (Object.keys(item).length > 0) {
@@ -45,10 +51,6 @@ const ModalSubcategory = ({ closeModal, item }) => {
     } else {
       dispatch(addSubcategory(formData));
     }
-  };
-  const handleSelect = (e) => {
-    setSelect(parseInt(e.target.value));
-    setFormData({ ...formData, categoryId: select });
   };
   return (
     <>

@@ -29,9 +29,14 @@
     li {
       border-bottom: 1px solid rgb(236, 224, 224);
       padding-top: 15px;
-      padding-left: 15px
+      padding-left: 15px;
     }
   }
+}
+.product-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 .modal-footer {
   button {
