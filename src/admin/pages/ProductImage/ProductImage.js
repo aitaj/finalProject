@@ -3,7 +3,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProductImage,fetchProductImages } from "./actions/index";
+import { deleteProductImage, fetchProductImages } from "./actions/index";
 import ModalProductImage from "./ModalProductImage";
 export default function Material() {
   const { productImages } = useSelector((state) => state.productImages);
@@ -56,37 +56,53 @@ export default function Material() {
               <div className="sizes my-4">
                 <ul>
                   <li>
-                    <div className="wrapper d-flex justify-content-between header-list mb-3">
-                      <h5>Ad</h5>
+                    <div className="row mb-2">
+                      <div className="col-4">
+                        <h5>Ad</h5>
+                      </div>
+                      <div className="col-4">
+                        <h5>Şəkil</h5>
+                      </div>
                     </div>
                   </li>
                   {productImages.map((img) => {
                     return (
                       <li>
-                        <div className="wrapper d-flex justify-content-between">
-                          <p>{img.name}</p>
-                          <img className='product-image' src={img.imagePath}/>
-                          <div className="btns-wrapper">
-                            <a
-                              onClick={() => handleEdit(img)}
-                              className="edit"
-                            >
-                              Yenilə
-                            </a>
-                            <Link
-                              to={`/admin/productimages/${img.id}`}
-                              className="details"
-                            >
-                              Detallar
-                            </Link>
-                            <a
-                              onClick={() => {
-                                handleDelete(img.id);
-                              }}
-                              className="delete"
-                            >
-                              Sil
-                            </a>
+                        <div className="row mb-2">
+                          <div className="col-4">
+                            <p>{img.name}</p>
+                          </div>
+                          <div className="col-4">
+                            <img
+                              className="product-image"
+                              src={img.imagePath}
+                            />
+                          </div>
+                          <div className="col-4">
+                            <div className="wrapper d-flex justify-content-between">
+                              <div className="btns-wrapper">
+                                <a
+                                  onClick={() => handleEdit(img)}
+                                  className="edit"
+                                >
+                                  Yenilə
+                                </a>
+                                <Link
+                                  to={`/admin/productimages/${img.id}`}
+                                  className="details"
+                                >
+                                  Detallar
+                                </Link>
+                                <a
+                                  onClick={() => {
+                                    handleDelete(img.id);
+                                  }}
+                                  className="delete"
+                                >
+                                  Sil
+                                </a>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </li>

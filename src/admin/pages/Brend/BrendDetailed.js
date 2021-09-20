@@ -40,7 +40,13 @@ const BrendDetailed = () => {
             <div className="product">
               <div className="productTitleContainer">
                 <h3 className="productTitle my-3">Detallı məlumat</h3>
-                <p className="productTitle">Ad :{brend.name}</p>
+                <p className="productTitle">Ad :{brend.name}</p>{" "}
+                <p className="productTitle">
+                  Əlavə edilmə tarixi :{" "}
+                  {brend.createdDate != null
+                    ? ` ${brend.createdDate.substring(0, 10)}`
+                    : "Təyin olunmayıb"}
+                </p>
                 <div className="btns-wrapper">
                   <Link to={`/admin/brends`} className="edit">
                     Siyahıya Qayıt

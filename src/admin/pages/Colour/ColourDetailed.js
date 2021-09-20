@@ -41,6 +41,12 @@ const ColourDetailed = () => {
               <div className="productTitleContainer">
                 <h3 className="productTitle my-3">Detallı məlumat</h3>
                 <p className="productTitle">Ad :{colour.name}</p>
+                <p className="productTitle">
+                  Əlavə edilmə tarixi :{" "}
+                  {colour.createdDate != null
+                    ? ` ${colour.createdDate.substring(0, 10)}`
+                    : "Təyin olunmayıb"}
+                </p>
                 <div className="btns-wrapper">
                   <Link to={`/admin/colours`} className="edit">
                     Siyahıya Qayıt

@@ -1,14 +1,64 @@
 import React, { useState, useEffect } from "react";
 import { Products } from "./Products";
 import Filter from "../Filter/Filter";
-import { Link } from "react-router-dom";
 import OwlCarousel from "react-owl-carousel";
 import Header from "../Layout/Header/Header";
 import Footer from "../Layout/Footer/Footer";
+import { Link, useParams, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../admin/pages/Product/actions";
 const ProductDetails = () => {
-  useEffect(() => {
-    let thumbnails = document.getElementsByClassName("thumbnail");
+  const { id } = useParams();
+  let location = useLocation();
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.products);
 
+  const useQuery = () => {
+    return new URLSearchParams(location.search);
+  };
+  let exactProduct = products.filter((p) => p.id == id);
+  const product = exactProduct[0];
+  let query = useQuery();
+  function beforeDiscount(currentPrice, discount) {
+    return (currentPrice * 100) / (100 - discount);
+  }
+  const formatDate = (date) => {
+    const datetime = new Date(date);
+    let dateDay = datetime.getDate();
+    let month = datetime.getMonth();
+    switch (month) {
+      case 0:
+        return `${dateDay} yanvar`;
+      case 1:
+        return `${dateDay} fevral`;
+      case 2:
+        return `${dateDay} mart`;
+      case 3:
+        return `${dateDay} aprel`;
+      case 4:
+        return `${dateDay} may`;
+      case 5:
+        return `${dateDay} iyun`;
+      case 6:
+        return `${dateDay} iyul`;
+      case 7:
+        return `${dateDay} avqust`;
+      case 8:
+        return `${dateDay} senyabr`;
+      case 9:
+        return `${dateDay} oktyabr`;
+      case 10:
+        return `${dateDay} noyabr`;
+      case 11:
+        return `${dateDay} dekabr`;
+      default:
+        break;
+    }
+
+  };
+  useEffect(() => {
+    dispatch(fetchProducts());
+    let thumbnails = document.getElementsByClassName("thumbnail");
     let activeImages = document.getElementsByClassName("active");
 
     for (var i = 0; i < thumbnails.length; i++) {
@@ -123,7 +173,7 @@ const ProductDetails = () => {
     }
 
     imageZoom("featured");
-  }, []);
+  }, [dispatch]);
   const [count, setCount] = useState(0);
   const handleDecrease = (count) => {
     if (count < 1) {
@@ -140,68 +190,34 @@ const ProductDetails = () => {
       <Header />
       <div className="row">
         <div className="col-12">
-          <h3 className="text-center my-4">Product name</h3>
+          <h3 className="text-center my-4">{product.name}</h3>
         </div>
         <div className="col-md-6">
           <div id="content-wrapper">
             <div className="column">
               <div id="img-container">
                 <div id="lens"></div>
-                <img
-                  id="featured"
-                  src="https://img.tozlu.com/Uploads/UrunResimleri/thumb/xp-studio-kirpik-yapistirici-d705.jpg"
-                />
+                <img id="featured" src={product.productImages[0].imagePath} />
               </div>
               <div id="slide-wrapper">
                 <img
                   id="slideLeft"
                   className="arrow"
-                  src="https://img.tozlu.com/Uploads/UrunResimleri/thumb/xp-studio-kirpik-yapistirici-d705.jpg"
+                  src={product.productImages[0].imagePath}
                 />
 
                 <div id="slider">
-                  <img
-                    className="thumbnail active"
-                    src="https://picsum.photos/id/237/200/300"
-                  />
-                  <img
-                    className="thumbnail"
-                    src="https://picsum.photos/seed/picsum/200/300"
-                  />
-                  <img
-                    className="thumbnail"
-                    src="https://picsum.photos/seed/picsum/200/300"
-                  />{" "}
-                  <img
-                    className="thumbnail active"
-                    src="https://picsum.photos/id/237/200/300"
-                  />
-                  <img
-                    className="thumbnail"
-                    src="https://picsum.photos/seed/picsum/200/300"
-                  />
-                  <img
-                    className="thumbnail"
-                    src="https://picsum.photos/seed/picsum/200/300"
-                  />{" "}
-                  <img
-                    className="thumbnail active"
-                    src="https://picsum.photos/id/237/200/300"
-                  />
-                  <img
-                    className="thumbnail"
-                    src="https://picsum.photos/seed/picsum/200/300"
-                  />
-                  <img
-                    className="thumbnail"
-                    src="https://picsum.photos/seed/picsum/200/300"
-                  />
+                  {product.productImages.map((element) => {
+                    return (
+                      <img className="thumbnail" src={element.imagePath} />
+                    );
+                  })}
                 </div>
 
                 <img
                   id="slideRight"
                   className="arrow"
-                  src="https://picsum.photos/seed/picsum/200/300"
+                  src={product.productImages[0].imagePath}
                 />
               </div>
             </div>
@@ -211,20 +227,26 @@ const ProductDetails = () => {
         <div className="col-md-6">
           <div className="product-info">
             <p className="price-info">
-              Qiymət:<span className="ex-price">275AZN-</span>
-              <span className="current-price">199AZN</span>
+              Qiymət:
+              <span className="ex-price">
+                {" "}
+                {beforeDiscount(
+                  parseFloat(product.price),
+                  parseFloat(product.discount)
+                ).toFixed(0)}
+                AZN-
+              </span>
+              <span className="current-price">{product.price}AZN</span>
             </p>
             <p className="description">
-              Ətraflı məlumat: The href attribute is required for an anchor to
-              be keyboard accessible. Provide a valid, navigable address as the
-              href value
+              Ətraflı məlumat: {product.description}
             </p>
-            <p className="discount-info">Endirim: 20%</p>
+            <p className="discount-info">Endirim: {product.discount}%</p>
             <p className="size">Ölçü: M</p>
-            <p>Rəng:Qara</p>
-            <p>Brend:Zara</p>
-            <p>Mağaza:Fəvvarələr meydanı</p>
-            <p>Endirim tarixi:3 sentyabr-8 sentyabr</p>
+            <p>Rəng:{product.productColor.name}</p>
+            <p>Brend:{product.brend.name}</p>
+            <p>Mağaza:{product.location.name}</p>
+            <p>Endirim tarixi:{formatDate(product.startDiscount)}-{formatDate(product.endDiscount)}</p>
             <div className="amount d-flex w-100 mt-2 mb-2 ">
               <a onClick={() => handleDecrease(count)}>
                 <i className="fas fa-minus"></i>

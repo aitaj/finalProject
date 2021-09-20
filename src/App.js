@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
+import BasketPage from "./pages/BasketPage";
 import ProductDetails from "./Product/ProductDetails";
 import Signin from "./Authorization/Signin/Signin";
 import Register from "./Authorization/Register/Register";
@@ -20,7 +21,7 @@ import ProductDetailed from "./admin/pages/Product/ProductDetailed";
 import ProductImageDetailed from "./admin/pages/ProductImage/ProductImageDetailed";
 import Colour from "./admin/pages/Colour/Colour";
 import Material from "./admin/pages/Material/Material";
-import Product from "./admin/pages/Product/Product";
+import ProductAdmin from "./admin/pages/Product/ProductAdmin";
 import ProductImage from "./admin/pages/ProductImage/ProductImage";
 function App() {
   return (
@@ -28,9 +29,10 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home}></Route>
+          <Route exact path="/basket" component={BasketPage}></Route>
           <Route path="/signin" component={Signin}></Route>
           <Route path="/register" component={Register}></Route>
-          <Route path="/product/id" component={ProductDetails}></Route>
+          {/* admin pages*/}
           <Route exact path="/admin/" component={HomeAdmin}></Route>
           <Route exact path="/admin/categories" component={Category}></Route>
           <Route exact path="/admin/sizes" component={Size}></Route>
@@ -38,7 +40,7 @@ function App() {
           <Route exact path="/admin/brends" component={Brend}></Route>
           <Route exact path="/admin/colours" component={Colour}></Route>
           <Route exact path="/admin/materials" component={Material}></Route>
-          <Route exact path="/admin/products" component={Product}></Route>
+          <Route exact path="/admin/products" component={ProductAdmin}></Route>
           <Route
             exact
             path="/admin/productimages"
@@ -81,6 +83,7 @@ function App() {
             path="/admin/products/:id"
             component={ProductDetailed}
           ></Route>
+          <Route exact path="/products/:id" component={ProductDetails}></Route>
           <Route
             exact
             path="/admin/productimages/:id"

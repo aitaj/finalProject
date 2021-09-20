@@ -15,7 +15,7 @@ const CategoryDetailed = () => {
 
   let query = useQuery();
   useEffect(() => {
-    const getCategory= async () => {
+    const getCategory = async () => {
       const { data } = await API.get(`/categories/${id}`);
       setCategory(data);
     };
@@ -40,7 +40,13 @@ const CategoryDetailed = () => {
             <div className="product">
               <div className="productTitleContainer">
                 <h3 className="productTitle my-3">Detallı məlumat</h3>
-                <p className="productTitle">Ad :{category.name}</p>
+                <p className="productTitle">Ad :{category.name}</p>{" "}
+                <p className="productTitle">
+                  Əlavə edilmə tarixi :{" "}
+                  {category.createdDate != null
+                    ? ` ${category.createdDate.substring(0, 10)}`
+                    : "Təyin olunmayıb"}
+                </p>
                 <div className="btns-wrapper">
                   <Link to={`/admin/categories`} className="edit">
                     Siyahıya Qayıt

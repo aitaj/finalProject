@@ -32,12 +32,18 @@
       padding-left: 15px;
     }
   }
+  select.custom-select{
+    width: 100%;
+    padding: 6px;
+  }
 }
 .product-image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
 }
+
+
 .modal-footer {
   button {
     @include adminButton;

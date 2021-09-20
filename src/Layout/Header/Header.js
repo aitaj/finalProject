@@ -228,7 +228,6 @@ const Header = () => {
       </div>
       {showModal && <Signin closeModal={handleCloseModal} />}
       <Switch>
-        <Route path="/basket" component={Basket} />
         <Route path="/register" component={Register} />
       </Switch>
     </div>

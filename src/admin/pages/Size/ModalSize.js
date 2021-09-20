@@ -29,7 +29,6 @@ const ModalSize = ({ showModal, closeModal, item }) => {
         deletedDate: item.deletedDate,
       });
     }
-    console.log(new Date().toLocaleDateString(), item);
   }, []);
 
   const handleChangeInp = (e, field) => {

@@ -39,6 +39,12 @@ const LocationDetailed = () => {
               <div className="productTitleContainer">
                 <h3 className="productTitle my-3">Detallı məlumat</h3>
                 <p className="productTitle">Ad :{locationItem.name}</p>
+                <p className="productTitle">
+                  Əlavə edilmə tarixi :{" "}
+                  {locationItem.createdDate != null
+                    ? ` ${locationItem.createdDate.substring(0, 10)}`
+                    : "Təyin olunmayıb"}
+                </p>
                 <div className="btns-wrapper">
                   <Link to={`/admin/locations`} className="edit">
                     Siyahıya Qayıt

@@ -41,6 +41,12 @@ const MaterialDetailed = () => {
               <div className="productTitleContainer">
                 <h3 className="productTitle my-3">Detallı məlumat</h3>
                 <p className="productTitle">Ad :{material.name}</p>
+                <p className="productTitle">
+                  Əlavə edilmə tarixi :{" "}
+                  {material.createdDate != null
+                    ? ` ${material.createdDate.substring(0, 10)}`
+                    : "Təyin olunmayıb"}
+                </p>
                 <div className="btns-wrapper">
                   <Link to={`/admin/materials`} className="edit">
                     Siyahıya Qayıt

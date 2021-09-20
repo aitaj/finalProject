@@ -75,6 +75,12 @@ export default function Sidebar() {
                   Products
                 </li>
               </Link>
+              <Link to="/admin/productimages" className="link">
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Product İmages
+                </li>
+              </Link>
             </ul>
           </div>
    

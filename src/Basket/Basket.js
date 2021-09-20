@@ -74,7 +74,6 @@ const Basket = () => {
                             </div>
                             <div className="col-md-1">
                               <a onClick={handleRemoveItem} className={pr.name}>
-                                {}
                                 <i className="fas fa-times"></i>
                               </a>
                             </div>

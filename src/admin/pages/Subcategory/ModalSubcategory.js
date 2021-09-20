@@ -11,6 +11,7 @@ const ModalSubcategory = ({ closeModal, item }) => {
   const { categories } = useSelector((state) => state.categories);
   const [formData, setFormData] = useState({
     name: "",
+    categoryId: null,
     createdByUserId: 1,
     createdDate: isodate,
     deletedByUserId: null,
@@ -34,15 +35,15 @@ const ModalSubcategory = ({ closeModal, item }) => {
     dispatch(fetchCategories());
   }, []);
 
-  const handleChangeInp = (e, field) => {
-    setFormData({ ...formData, [field]: e.target.value , categoryId: select});
-    console.log(formData)
-  };
-
-  const handleSelect = (e) => {
-    setSelect(parseInt(e.target.value));
-    setFormData({ ...formData, categoryId: select });
-    console.log(formData)
+  const handleChangeInp = (e, field, parse = false) => {
+    if (parse) {
+      setFormData({ ...formData, [field]: parseInt(e.target.value) });
+    } else {
+      setFormData({
+        ...formData,
+        [field]: e.target.value,
+      });
+    }
   };
   const handleAction = () => {
     closeModal();
@@ -63,7 +64,7 @@ const ModalSubcategory = ({ closeModal, item }) => {
           </Modal.Header>
           <Modal.Body>
             <form>
-              <select className="mb-3" onChange={handleSelect}>
+              <select className="mb-3 custom-select" onChange={(e)=>handleChangeInp(e,"categoryId",true)}>
                 <option selected disabled value="Categories">
                   Kategoriyalar
                 </option>

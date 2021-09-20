@@ -8,7 +8,6 @@ const ProductImageDetailed = () => {
   const [productImage, setProductImage] = useState({});
   const { id } = useParams();
   let location = useLocation();
-
   const useQuery = () => {
     return new URLSearchParams(location.search);
   };
@@ -41,8 +40,21 @@ const ProductImageDetailed = () => {
               <div className="productTitleContainer">
                 <h3 className="productTitle my-3">Detallı məlumat</h3>
                 <p className="productTitle">Ad :{productImage.name}</p>
+                <img className="product-image" src={productImage.imagePath} />
+                <p className="productTitle">
+                  Məhsul :
+                  {productImage.product != null
+                    ? productImage.product.name
+                    : "Təyin olunmayıb"}
+                </p>
+                <p className="productTitle">
+                  Əlavə edilmə tarixi :{" "}
+                  {productImage.product != null
+                    ? productImage.product.createdDate.substring(0, 10)
+                    : "Təyin olunmayıb"}
+                </p>
                 <div className="btns-wrapper">
-                  <Link to={`/admin/productimages`} className="edit">
+                  <Link to={`/admin/productimages`} className="edit mt-2">
                     Siyahıya Qayıt
                   </Link>
                 </div>

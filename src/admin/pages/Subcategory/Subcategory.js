@@ -57,37 +57,53 @@ export default function Subcategory() {
               <div className="sizes my-4">
                 <ul>
                   <li>
-                    <div className="wrapper d-flex justify-content-between header-list mb-3">
-                      <h5>Ad</h5>
+                    <div className="row mb-2">
+                      <div className="col-4">
+                        <h5>Ad</h5>
+                      </div>
+                      <div className="col-4">
+                        <h5>Kateqoriya</h5>
+                      </div>
                     </div>
                   </li>
                   {subcategories.map((subcategory, index) => {
                     return (
                       <li>
-                        <div className="wrapper d-flex justify-content-between">
-                          <p>{subcategory.name}</p>
-                          <span>{subcategory.categoryId}</span>
-                          <div className="btns-wrapper">
-                            <a
-                              onClick={() => handleEdit(subcategory)}
-                              className="edit"
-                            >
-                              Yenilə
-                            </a>
-                            <Link
-                              to={`/admin/subcategories/${subcategory.id}`}
-                              className="details"
-                            >
-                              Detallar
-                            </Link>
-                            <a
-                              onClick={() => {
-                                handleDelete(subcategory.id);
-                              }}
-                              className="delete"
-                            >
-                              Sil
-                            </a>
+                        <div className="row">
+                          <div className="col-4">
+                            <p>{subcategory.name}</p>
+                          </div>
+                          <div className="col-4">
+                            {" "}
+                            <p className="productTitle">
+                              {subcategory.category == undefined
+                                ? "teyin olunmayib"
+                                : `${subcategory.category.name}`}
+                            </p>
+                          </div>
+                          <div className="col-4">
+                            <div className="btns-wrapper">
+                              <a
+                                onClick={() => handleEdit(subcategory)}
+                                className="edit"
+                              >
+                                Yenilə
+                              </a>
+                              <Link
+                                to={`/admin/subcategories/${subcategory.id}`}
+                                className="details"
+                              >
+                                Detallar
+                              </Link>
+                              <a
+                                onClick={() => {
+                                  handleDelete(subcategory.id);
+                                }}
+                                className="delete"
+                              >
+                                Sil
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </li>
