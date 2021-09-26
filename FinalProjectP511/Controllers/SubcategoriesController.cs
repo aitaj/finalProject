@@ -28,6 +28,11 @@ namespace Logo.API.Controllers
             var data = await db.SubCategories
                 .Where(s => s.DeletedDate == null)
                 .ToListAsync();
+            foreach (var item in data)
+            {
+
+                item.Category = await db.Categories.FirstOrDefaultAsync(c => c.Id == item.CategoryId);
+            }
             return Ok(data);
         }
 
@@ -37,11 +42,12 @@ namespace Logo.API.Controllers
         {
             var data = await db.SubCategories
                 .FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);
+            data.Category = await db.Categories.FirstOrDefaultAsync(c => c.Id == data.CategoryId);
             return Ok(data);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([Bind("Name,CategoryId")] SubCategory model)
+        public async Task<IActionResult> Add( SubCategory model)
         {
             if (!ModelState.IsValid)
             {
@@ -49,8 +55,7 @@ namespace Logo.API.Controllers
             }
 
 
-            model.Category = db.Categories.Single(c=>c.Id==model.CategoryId);
-
+            model.Category = await db.Categories.FirstOrDefaultAsync(c => c.Id == model.CategoryId);
             await db.SubCategories.AddAsync(model);
 
 
@@ -81,8 +86,8 @@ namespace Logo.API.Controllers
             if (entity == null)
                 return NotFound();
 
-            entity.Name = model.Name;
-            entity.CategoryId = model.CategoryId;
+            model.Category = await db.Categories.FirstOrDefaultAsync(c => c.Id == model.CategoryId);
+            entity.Name = model.Name;//
             entity.Category = model.Category;
             entity.CreatedByUserId = model.CreatedByUserId;
             entity.CreatedDate = model.CreatedDate;

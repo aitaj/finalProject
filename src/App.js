@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+// const OtherComponent = React.lazy(() => import("./OtherComponent"));
 import Home from "./pages/Home";
 import BasketPage from "./pages/BasketPage";
 import ProductDetails from "./Product/ProductDetails";
@@ -24,13 +26,27 @@ import Material from "./admin/pages/Material/Material";
 import ProductAdmin from "./admin/pages/Product/ProductAdmin";
 import ProductImage from "./admin/pages/ProductImage/ProductImage";
 function App() {
+  const [name,setName]=useState("");
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("https://localhost:44349/api/user", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const content = await response.json();
+      setName(content.name);
+      console.log(response);
+    })();
+  }, []);
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/basket" component={BasketPage}></Route>
-          <Route path="/signin" component={Signin}></Route>
+          <Route path="/login" component={Signin}></Route>
           <Route path="/register" component={Register}></Route>
           {/* admin pages*/}
           <Route exact path="/admin/" component={HomeAdmin}></Route>

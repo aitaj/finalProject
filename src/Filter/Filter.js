@@ -1,39 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Products } from "../Product/Products.js";
-const Filter = ({ filteredProducts }) => {
+import {  useSelector } from "react-redux";
+import Product from "../Product/Product";
+const Filter = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [input, setInput] = useState({
     minPrice: 0,
-    maxPrice: 10000,
+    maxPrice: 500,
     minPercent: 0,
     maxPercent: 99,
   });
-  const [brend, setBrend] = useState(filteredProducts[0].brend);
-  const [currentProducts,setCurrentProducts]=useState([]);
+  const [brend, setBrend] = useState();
+  const { products } = useSelector((state) => state.products);
+  let currentProducts;
   const handleBrendSelect = (e) => {
     setBrend(e.target.value);
   };
   const handleOpenFilter = () => {
     setIsClicked(!isClicked);
   };
-  const brends = Products.map((p) => {
-    return p.brend;
-  }).filter((v, i, a) => a.indexOf(v) === i);
-
+  const brends = products
+    .map((p) => {
+      return p.brend.name;
+    })
+    .filter((v, i, a) => a.indexOf(v) === i);
   const inputChange = (e, field) => {
     setInput({ ...input, [field]: parseFloat(e.target.value) });
   };
   const handleFilterForm = () => {
-    filteredProducts = filteredProducts.filter(
+    currentProducts = products.filter(
       (p) => p.price > input.minPrice && p.price < input.maxPrice
     );
-    filteredProducts = filteredProducts.filter(
+    currentProducts = currentProducts.filter(
       (p) => p.discount > input.minPercent && p.discount < input.maxPercent
     );
-    filteredProducts = filteredProducts.filter((pr) => pr.brend == brend);
-    console.log(filteredProducts);
+    console.log(currentProducts)
   };
-  
+  let filteredProducts;
   return (
     <>
       <div className="col-md-3">
@@ -128,6 +130,7 @@ const Filter = ({ filteredProducts }) => {
           </div>
         </div>
       </div>
+      {/* <Product products={filteredProducts} />{" "} */}
     </>
   );
 };

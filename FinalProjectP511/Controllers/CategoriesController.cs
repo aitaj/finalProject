@@ -29,6 +29,11 @@ namespace Logo.API.Controllers
         public async Task<IActionResult> Get()
         {
             var data = await db.Categories.Where(s => s.DeletedDate == null).ToListAsync();
+            foreach (var item in data)
+            {
+                item.SubCategories = await db.SubCategories.Where(s => s.CategoryId== item.Id).ToListAsync();
+
+            }
             return Ok(data);
         }
 
@@ -37,6 +42,7 @@ namespace Logo.API.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var data = await db.Categories.FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);
+            data.SubCategories = await db.SubCategories.Where(s => s.CategoryId == data.Id).ToListAsync();
             return Ok(data);
         }
 
@@ -48,6 +54,7 @@ namespace Logo.API.Controllers
                 return BadRequest(ModelState);
             }
 
+            model.SubCategories = await db.SubCategories.Where(s => s.CategoryId == model.Id).ToListAsync();
             model.CreatedByUserId = 1;//get user id from context
             var category = await db.Categories.AddAsync(model);
 
@@ -79,6 +86,7 @@ namespace Logo.API.Controllers
 
             entity.Name = model.Name;
 
+           entity.SubCategories = await db.SubCategories.Where(s => s.CategoryId == entity.Id).ToListAsync();
 
             await db.SaveChangesAsync();
 

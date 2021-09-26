@@ -106,7 +106,7 @@ const Header = () => {
             <div className="col-md-1">
               <div className="sign-in d-flex justify-content-center flex-column align-items-center h-100">
                 <Link
-                  to="/signin"
+                  to="/login"
                   className="d-flex justify-content-center align-items-center "
                   onClick={handleShow}
                 >
@@ -173,7 +173,7 @@ const Header = () => {
             <Link to="/basket">
               <i className="fas  fa-shopping-basket"></i>
             </Link>
-            <Link to="signin">
+            <Link to="login">
               <i className="fas fa-sign-in-alt"></i>
             </Link>
           </div>

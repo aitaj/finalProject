@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { userRegister } from "../Register/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import Header from "../../Layout/Header/Header";
-import Footer from "../../Layout/Footer/Footer";
+import { Link, useHistory, Redirect } from "react-router-dom";
 const Register = () => {
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const [redirect, setRedirect] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const handleInputChange = (e, field) => {
@@ -17,23 +15,26 @@ const Register = () => {
   };
 
   const info = useSelector((state) => state.userInfo);
+  console.log(user);
   // useEffect(() => {
   //   if (Object.keys(info).length > 0) {
   //     history.push("/");
   //   }
   // }, [info, history]);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(userRegister(user));
-    setUser({
-      name: "",
-      email: "",
-      password: "",
+    await fetch("https://localhost:44349/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
     });
+    setRedirect(true);
   };
+  if (redirect) {
+   return <Redirect to="/login" />;
+  }
   return (
     <>
-      {/* <Header /> */}
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-6">
@@ -45,7 +46,7 @@ const Register = () => {
                   Daxil olun
                 </Link>
               </p>
-              {info.error && <p className="text-danger">{info.error}</p>}
+              {/* {info.error && <p className="text-danger">{info.error}</p>} */}
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <input
@@ -87,7 +88,6 @@ const Register = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
     </>
   );
 };
