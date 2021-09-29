@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
     <div className="col-md-4 col-6">
       <div className="product-card mt-2">
         <div className="custom-card-header">
-          <img className="img-fluid" src={product.productImages[0].imagePath} />
+          <img className="img-fluid" src={product.productImages[0]!=null?product.productImages[0].imagePath:""} />
         </div>
         <div className="custom-card-body text-center">
           <a>

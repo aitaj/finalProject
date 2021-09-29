@@ -16,12 +16,13 @@ const ProductDetails = () => {
   const useQuery = () => {
     return new URLSearchParams(location.search);
   };
-  let exactProduct = products.filter((p) => p.id == id);
-  const product = exactProduct[0];
+  let exactProduct = products.find((p) => p.id == id);
+  const product = exactProduct;
   let query = useQuery();
   function beforeDiscount(currentPrice, discount) {
     return (currentPrice * 100) / (100 - discount);
   }
+
   const formatDate = (date) => {
     const datetime = new Date(date);
     let dateDay = datetime.getDate();
@@ -54,7 +55,6 @@ const ProductDetails = () => {
       default:
         break;
     }
-
   };
   useEffect(() => {
     dispatch(fetchProducts());
@@ -174,6 +174,7 @@ const ProductDetails = () => {
 
     imageZoom("featured");
   }, [dispatch]);
+
   const [count, setCount] = useState(0);
   const handleDecrease = (count) => {
     if (count < 1) {
@@ -184,7 +185,42 @@ const ProductDetails = () => {
   const handleIncrease = (count) => {
     setCount(count + 1);
   };
+  const handleAddBasket = (element, count) => {
+    let basket = JSON.parse(localStorage.getItem("basket")); // Parse data from localstorage
 
+    let elementimageUrl =
+      element.productImages[0] != null
+        ? product.productImages[0].imagePath
+        : ""; // element.imageUrl is a part of backend data received from JSON file
+    let elementId = element.id; // element._id is a part of backend data received from JSON file
+    let elementName = element.name; // element.name is a part of backend data received from JSON file
+    let elementPrice = element.price; // element.price is a part of backend data received from JSON file
+    let elementQuantity = count;
+    let elementDiscount = element.discount;
+
+    if (!basket) {
+      basket = [];
+    }
+
+    // find the index of the item if already in basket
+    const itemIndexInBasket = basket.findIndex(
+      (basketEntry) => basketEntry.elementId === elementId
+    );
+    if (itemIndexInBasket !== -1) {
+      basket[itemIndexInBasket].elementQuantity++;
+    } else {
+      basket.push({
+        elementId,
+        elementName,
+        elementPrice,
+        elementQuantity,
+        elementimageUrl,
+        elementDiscount,
+      }); // Push not existing data to localstorage
+    }
+    localStorage.setItem("basket", JSON.stringify(basket));
+    window.location.reload();
+  };
   return (
     <>
       <Header />
@@ -197,13 +233,24 @@ const ProductDetails = () => {
             <div className="column">
               <div id="img-container">
                 <div id="lens"></div>
-                <img id="featured" src={product.productImages[0].imagePath} />
+                <img
+                  id="featured"
+                  src={
+                    product.productImages[0] != null
+                      ? product.productImages[0].imagePath
+                      : ""
+                  }
+                />
               </div>
               <div id="slide-wrapper">
                 <img
                   id="slideLeft"
                   className="arrow"
-                  src={product.productImages[0].imagePath}
+                  src={
+                    product.productImages[0] != null
+                      ? product.productImages[0].imagePath
+                      : ""
+                  }
                 />
 
                 <div id="slider">
@@ -217,7 +264,11 @@ const ProductDetails = () => {
                 <img
                   id="slideRight"
                   className="arrow"
-                  src={product.productImages[0].imagePath}
+                  src={
+                    product.productImages[0] != null
+                      ? product.productImages[0].imagePath
+                      : ""
+                  }
                 />
               </div>
             </div>
@@ -233,7 +284,7 @@ const ProductDetails = () => {
                 {beforeDiscount(
                   parseFloat(product.price),
                   parseFloat(product.discount)
-                ).toFixed(0)}
+                ).toFixed(2)}
                 AZN-
               </span>
               <span className="current-price">{product.price}AZN</span>
@@ -246,7 +297,10 @@ const ProductDetails = () => {
             <p>Rəng:{product.productColor.name}</p>
             <p>Brend:{product.brend.name}</p>
             <p>Mağaza:{product.location.name}</p>
-            <p>Endirim tarixi:{formatDate(product.startDiscount)}-{formatDate(product.endDiscount)}</p>
+            <p>
+              Endirim tarixi:{formatDate(product.startDiscount)}-
+              {formatDate(product.endDiscount)}
+            </p>
             <div className="amount d-flex w-100 mt-2 mb-2 ">
               <a onClick={() => handleDecrease(count)}>
                 <i className="fas fa-minus"></i>
@@ -256,9 +310,14 @@ const ProductDetails = () => {
                 <i className="fas fa-plus"></i>
               </a>
             </div>
-            <p>Сəmi:300AZN</p>
+            <p>Сəmi:{(product.price * count).toFixed(2)}AZN</p>
             <div className="buttons-basket-back d-flex  my-4">
-              <a className="add-basket mr-3">Səbətə at</a>
+              <a
+                onClick={() => handleAddBasket(product, count)}
+                className="add-basket mr-3"
+              >
+                Səbətə at
+              </a>
               <a className="go-back">Geriyə</a>
             </div>
           </div>

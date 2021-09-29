@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../admin/pages/Product/actions";
-const Product = () => {
+const Product = ({ takeClickedCategory }) => {
   const { products } = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [isClicked, setIsClicked] = useState(false);
@@ -14,10 +14,16 @@ const Product = () => {
   });
   const [brend, setBrend] = useState();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
   let currentProducts;
+  useEffect(() => {
+    dispatch(fetchProducts());   
+     if (takeClickedCategory != 0) {
+      currentProducts = products.filter(
+        (item) => item.subCategory.categoryId == takeClickedCategory
+      );
+      setFilteredProducts(currentProducts);
+    }
+  }, []);
   const handleBrendSelect = (e) => {
     setBrend(e.target.value);
   };
@@ -39,6 +45,7 @@ const Product = () => {
     currentProducts = currentProducts.filter(
       (p) => p.discount > input.minPercent && p.discount < input.maxPercent
     );
+
     setFilteredProducts(currentProducts);
   };
 
@@ -149,7 +156,7 @@ const Product = () => {
 
           <div className="col-md-9">
             <div className="row">
-              {products.map((product, index) => {
+              {filteredProducts.map((product, index) => {
                 return <ProductCard key={index} product={product} />;
               })}
             </div>

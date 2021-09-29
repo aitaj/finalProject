@@ -41,11 +41,22 @@
         padding: 7px;
       }
       .basket {
+        position: relative;
         @include header-link;
         i {
           color: $green;
           font-size: 16px;
           margin-right: 5px;
+        }
+        span {
+          position: absolute;
+          background-color: $red !important;
+          color: $white;
+          font-size: 10px;
+          padding: 1px 4px;
+          border-radius: 50%;
+          top: -4px;
+          left: 21px;
         }
       }
       .sign-in {
@@ -207,6 +218,8 @@
       animation-duration: 2s;
       top: 50px;
       padding-top: 0px;
+      z-index: 300;
+      height: 800px;
     }
     .navbar {
       position: relative;
@@ -218,6 +231,7 @@
       }
     }
     .nav-wrapper.active {
+      height: 800px;
       z-index: 300;
       position: absolute;
       left: 0px;
