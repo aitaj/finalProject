@@ -10,8 +10,7 @@ import { colourReducer } from "../admin/pages/Colour/reducers";
 import { materialReducer } from "../admin/pages/Material/reducers";
 import { productReducer } from "../admin/pages/Product/reducers";
 import { productImageReducer } from "../admin/pages/ProductImage/reducers";
-
-
+import { companyReducer } from "../admin/pages/Company/reducers";
 
 const reducers = combineReducers({
   categories: categoryReducer,
@@ -22,7 +21,8 @@ const reducers = combineReducers({
   colours: colourReducer,
   materials: materialReducer,
   products: productReducer,
-  productImages:productImageReducer,
+  productImages: productImageReducer,
+  companies: companyReducer,
 });
 
 const store = createStore(

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../admin/pages/Product/actions";
+import ReactPaginate from "react-paginate";
 const Product = ({ takeClickedCategory }) => {
   const { products } = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState(products);
+  const [isFiltered, setIsFiltered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [input, setInput] = useState({
     minPrice: 0,
@@ -16,13 +18,7 @@ const Product = ({ takeClickedCategory }) => {
   const dispatch = useDispatch();
   let currentProducts;
   useEffect(() => {
-    dispatch(fetchProducts());   
-     if (takeClickedCategory != 0) {
-      currentProducts = products.filter(
-        (item) => item.subCategory.categoryId == takeClickedCategory
-      );
-      setFilteredProducts(currentProducts);
-    }
+    dispatch(fetchProducts());
   }, []);
   const handleBrendSelect = (e) => {
     setBrend(e.target.value);
@@ -47,6 +43,7 @@ const Product = ({ takeClickedCategory }) => {
     );
 
     setFilteredProducts(currentProducts);
+    setIsFiltered(true);
   };
 
   return (
@@ -156,9 +153,13 @@ const Product = ({ takeClickedCategory }) => {
 
           <div className="col-md-9">
             <div className="row">
-              {filteredProducts.map((product, index) => {
-                return <ProductCard key={index} product={product} />;
-              })}
+              {isFiltered
+                ? filteredProducts.map((product, index) => {
+                    return <ProductCard key={index} product={product} />;
+                  })
+                : products.map((product, index) => {
+                    return <ProductCard key={index} product={product} />;
+                  })}
             </div>
           </div>
         </div>

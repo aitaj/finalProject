@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Switch, Route } from "react-router-dom";
-import Basket from "../../Basket/Basket";
-import Product from "../../Product/Product";
 import Signin from "../../Authorization/Signin/Signin";
-import { MenuItems } from "./MenuItems";
 import OwlCarousel from "react-owl-carousel";
 import Register from "../../Authorization/Register/Register";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +9,6 @@ import { fetchCategories } from "../../admin/pages/Category/actions/index";
 const Header = () => {
   const [clickedBar, setClickedBar] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [basketClicked, setBasketClicked] = useState(false);
   const [categoryClicked, setCategoryClicked] = useState(0);
   const { subcategories } = useSelector((state) => state.subcategories);
   const { categories } = useSelector((state) => state.categories);
@@ -177,8 +173,9 @@ const Header = () => {
               <a>
                 <i className="fas fa-heart"></i>
               </a>
-              <Link to="/basket">
+              <Link className="basket" to="/basket">
                 <i className="fas  fa-shopping-basket"></i>
+                <span>{products.length}</span>
               </Link>
               <Link to="/login">
                 <i className="fas fa-sign-in-alt"></i>
@@ -195,10 +192,10 @@ const Header = () => {
                 loop={true}
                 dots={false}
               >
-                {MenuItems.map((item) => {
+                {categories.map((item) => {
                   return (
-                    <a target="_self" href={item.url} className="main-link">
-                      <span>{item.title}</span>
+                    <a target="_self" href={item.name} className="main-link">
+                      <span>"saa"</span>
                     </a>
                   );
                 })}
@@ -241,7 +238,6 @@ const Header = () => {
           <Route path="/register" component={Register} />
         </Switch>
       </div>
-      <Product takeClickedCategory={categoryClicked}></Product>
     </>
   );
 };

@@ -25,8 +25,10 @@ import Colour from "./admin/pages/Colour/Colour";
 import Material from "./admin/pages/Material/Material";
 import ProductAdmin from "./admin/pages/Product/ProductAdmin";
 import ProductImage from "./admin/pages/ProductImage/ProductImage";
+import Company from "./admin/pages/Company/Company";
+import CompanyDetailed from "./admin/pages/Company/CompanyDetailed";
 function App() {
-  const [name,setName]=useState("");
+  const [name, setName] = useState("");
   useEffect(() => {
     (async () => {
       const response = await fetch("https://localhost:44349/api/user", {
@@ -62,6 +64,7 @@ function App() {
             path="/admin/productimages"
             component={ProductImage}
           ></Route>
+          <Route exact path="/admin/companies" component={Company}></Route>
           <Route
             exact
             path="/admin/subcategories"
@@ -104,6 +107,11 @@ function App() {
             exact
             path="/admin/productimages/:id"
             component={ProductImageDetailed}
+          ></Route>
+          <Route
+            exact
+            path="/admin/companies/:id"
+            component={CompanyDetailed}
           ></Route>
         </Switch>
       </Router>

@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Products } from "./Products";
-import Filter from "../Filter/Filter";
-import OwlCarousel from "react-owl-carousel";
 import Header from "../Layout/Header/Header";
 import Footer from "../Layout/Footer/Footer";
 import { Link, useParams, useLocation } from "react-router-dom";
@@ -12,12 +9,13 @@ const ProductDetails = () => {
   let location = useLocation();
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
-
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
   const useQuery = () => {
     return new URLSearchParams(location.search);
   };
-  let exactProduct = products.find((p) => p.id == id);
-  const product = exactProduct;
+  let product = products.find((p) => p.id == id);
   let query = useQuery();
   function beforeDiscount(currentPrice, discount) {
     return (currentPrice * 100) / (100 - discount);
@@ -219,14 +217,15 @@ const ProductDetails = () => {
       }); // Push not existing data to localstorage
     }
     localStorage.setItem("basket", JSON.stringify(basket));
-    window.location.reload();
   };
   return (
     <>
       <Header />
       <div className="row">
         <div className="col-12">
-          <h3 className="text-center my-4">{product.name}</h3>
+          <h3 className="text-center my-4">
+            {product != undefined ? product.name : ""}
+          </h3>
         </div>
         <div className="col-md-6">
           <div id="content-wrapper">

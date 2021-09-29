@@ -3,27 +3,27 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProductImage, fetchProductImages } from "./actions/index";
-import ModalProductImage from "./ModalProductImage";
-export default function ProductImage() {
-  const { productImages } = useSelector((state) => state.productImages);
+import { deleteCompany, fetchCompanies } from "./actions/index";
+import ModalCompany from "./ModalCompany";
+export default function Company() {
+  const { companies } = useSelector((state) => state.companies);
   const [showModal, setShowModal] = useState(false);
-  const [productImage, setProductImage] = useState({});
+  const [company, setCompany] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProductImages());
+    dispatch(fetchCompanies());
   }, []);
   const handleDelete = (id) => {
-    dispatch(deleteProductImage(id));
+    dispatch(deleteCompany(id));
   };
   const handleEdit = (size) => {
-    setProductImage(size);
+    setCompany(size);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setProductImage({});
+    setCompany({});
   };
 
   const handleAdd = () => {
@@ -65,7 +65,7 @@ export default function ProductImage() {
                       </div>
                     </div>
                   </li>
-                  {productImages.map((img) => {
+                  {companies.map((img) => {
                     return (
                       <li>
                         <div className="row mb-2">
@@ -88,7 +88,7 @@ export default function ProductImage() {
                                   Yenilə
                                 </a>
                                 <Link
-                                  to={`/admin/productimages/${img.id}`}
+                                  to={`/admin/companies/${img.id}`}
                                   className="details"
                                 >
                                   Detallar
@@ -115,10 +115,10 @@ export default function ProductImage() {
         </div>
       </div>
       {showModal && (
-        <ModalProductImage
+        <ModalCompany
           closeModal={handleCloseModal}
-          item={productImage}
-        ></ModalProductImage>
+          item={company}
+        ></ModalCompany>
       )}
     </>
   );

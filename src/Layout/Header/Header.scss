@@ -52,7 +52,7 @@
           position: absolute;
           background-color: $red !important;
           color: $white;
-          font-size: 10px;
+          font-size: 7px;
           padding: 1px 4px;
           border-radius: 50%;
           top: -4px;
@@ -181,6 +181,19 @@
       }
       .nav-header {
         padding: 20px 45px;
+      }
+    }
+    .basket {
+      position: relative;
+      span {
+        position: absolute;
+        background-color: $red !important;
+        color: $white;
+        font-size: 7px;
+        padding: 1px 4px;
+        border-radius: 50%;
+        top: -4px;
+        left: 21px;
       }
     }
     .main-link {
