@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 // const OtherComponent = React.lazy(() => import("./OtherComponent"));
 import Home from "./pages/Home";
 import BasketPage from "./pages/BasketPage";
-import ProductDetails from "./Product/ProductDetails";
 import Signin from "./Authorization/Signin/Signin";
 import Register from "./Authorization/Register/Register";
 import Category from "./admin/pages/Category/Category";
@@ -27,6 +26,7 @@ import ProductAdmin from "./admin/pages/Product/ProductAdmin";
 import ProductImage from "./admin/pages/ProductImage/ProductImage";
 import Company from "./admin/pages/Company/Company";
 import CompanyDetailed from "./admin/pages/Company/CompanyDetailed";
+import ProductWithDetails from "./pages/ProductWithDetails";
 function App() {
   const [name, setName] = useState("");
   useEffect(() => {
@@ -50,7 +50,7 @@ function App() {
           <Route exact path="/basket" component={BasketPage}></Route>
           <Route path="/login" component={Signin}></Route>
           <Route path="/register" component={Register}></Route>
-          {/* admin pages*/}
+          <Route path="/products/:id" component={ProductWithDetails}></Route>
           <Route exact path="/admin/" component={HomeAdmin}></Route>
           <Route exact path="/admin/categories" component={Category}></Route>
           <Route exact path="/admin/sizes" component={Size}></Route>
@@ -102,7 +102,6 @@ function App() {
             path="/admin/products/:id"
             component={ProductDetailed}
           ></Route>
-          <Route exact path="/products/:id" component={ProductDetails}></Route>
           <Route
             exact
             path="/admin/productimages/:id"

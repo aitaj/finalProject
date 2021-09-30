@@ -25,7 +25,7 @@ const Footer = () => {
 
   return (
     <>
-      <div id="footer">
+      <div id="footer" className='mt-5'>
         {" "}
         <a
           class={isActive ? "sticky-btn active" : "sticky-btn hide"}

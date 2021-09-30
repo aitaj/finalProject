@@ -195,7 +195,7 @@ const Header = () => {
                 {categories.map((item) => {
                   return (
                     <a target="_self" href={item.name} className="main-link">
-                      <span>"saa"</span>
+                      <span>{item.name}</span>
                     </a>
                   );
                 })}

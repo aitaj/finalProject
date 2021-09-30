@@ -4,19 +4,9 @@ import Footer from "../Layout/Footer/Footer";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../admin/pages/Product/actions";
-const ProductDetails = () => {
-  const { id } = useParams();
-  let location = useLocation();
+const ProductDetails = ({product,id}) => {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
-  const useQuery = () => {
-    return new URLSearchParams(location.search);
-  };
-  let product = products.find((p) => p.id == id);
-  let query = useQuery();
+
   function beforeDiscount(currentPrice, discount) {
     return (currentPrice * 100) / (100 - discount);
   }
@@ -235,9 +225,10 @@ const ProductDetails = () => {
                 <img
                   id="featured"
                   src={
-                    product.productImages[0] != null
+                    product==null?"":
+                    (product.productImages[0] != null
                       ? product.productImages[0].imagePath
-                      : ""
+                      : "")
                   }
                 />
               </div>
@@ -246,27 +237,29 @@ const ProductDetails = () => {
                   id="slideLeft"
                   className="arrow"
                   src={
-                    product.productImages[0] != null
+                    product==null?"":
+                    (product.productImages[0] != null
                       ? product.productImages[0].imagePath
-                      : ""
+                      : "")
                   }
                 />
 
                 <div id="slider">
-                  {product.productImages.map((element) => {
+                  {product!=null?product.productImages.map((element) => {
                     return (
                       <img className="thumbnail" src={element.imagePath} />
                     );
-                  })}
+                  }):""}
                 </div>
 
                 <img
                   id="slideRight"
                   className="arrow"
                   src={
-                    product.productImages[0] != null
+                    product==null?"":
+                    (product.productImages[0] != null
                       ? product.productImages[0].imagePath
-                      : ""
+                      : "")
                   }
                 />
               </div>
@@ -280,25 +273,25 @@ const ProductDetails = () => {
               Qiymət:
               <span className="ex-price">
                 {" "}
-                {beforeDiscount(
+                {product!=null?beforeDiscount(
                   parseFloat(product.price),
                   parseFloat(product.discount)
-                ).toFixed(2)}
+                ).toFixed(2):""}
                 AZN-
               </span>
-              <span className="current-price">{product.price}AZN</span>
+              <span className="current-price">{product!=null?product.price:""}AZN</span>
             </p>
             <p className="description">
-              Ətraflı məlumat: {product.description}
+              Ətraflı məlumat: {product!=null?product.description:""}
             </p>
-            <p className="discount-info">Endirim: {product.discount}%</p>
+            <p className="discount-info">Endirim: {product!=null?product.discount:""}%</p>
             <p className="size">Ölçü: M</p>
-            <p>Rəng:{product.productColor.name}</p>
-            <p>Brend:{product.brend.name}</p>
-            <p>Mağaza:{product.location.name}</p>
+            <p>Rəng:{product!=null?product.productColor.name:""}</p>
+            <p>Brend:{product!=null?product.brend.name:""}</p>
+            <p>Mağaza:{product!=null?product.location.name:""}</p>
             <p>
-              Endirim tarixi:{formatDate(product.startDiscount)}-
-              {formatDate(product.endDiscount)}
+              Endirim tarixi:{product!=null?formatDate(product.startDiscount):""}-
+              {product!=null?formatDate(product.endDiscount):""}
             </p>
             <div className="amount d-flex w-100 mt-2 mb-2 ">
               <a onClick={() => handleDecrease(count)}>
@@ -309,10 +302,10 @@ const ProductDetails = () => {
                 <i className="fas fa-plus"></i>
               </a>
             </div>
-            <p>Сəmi:{(product.price * count).toFixed(2)}AZN</p>
+            <p>Сəmi:{product!=null?(product.price * count).toFixed(2):""}AZN</p>
             <div className="buttons-basket-back d-flex  my-4">
               <a
-                onClick={() => handleAddBasket(product, count)}
+                onClick={product!=null?() => handleAddBasket(product, count):""}
                 className="add-basket mr-3"
               >
                 Səbətə at

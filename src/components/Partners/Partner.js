@@ -1,26 +1,22 @@
 import React, { useEffect,useState } from "react";
 import OwlCarousel from "react-owl-carousel";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCompanies } from "../../admin/pages/Company/actions";
-const Partner = ({ s }) => {
-  const { companies } = useSelector((state) => state.companies);
+const Partner = ({ companies }) => {
   const [categoryClicked, setCategoryClicked] = useState(0);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchCompanies());
-  }, []);
+
   return (
-    <div className="container">
-      <h3 className="text-center my-5">Partnyorlarımız</h3>
+    <div className="container mt-4">
+      {/* <h1 className="text-center my-5">Partnyorlarımız</h1> */}
       <OwlCarousel
         className="owl-theme"
         autoplayTimeout={7000}
-        items={3}
+        items={6}
         autoplay={true}
         loop
         margin={10}
         loop={true}
-        dots={true}
+        dots={false}
       >
         {companies.map((item) => {
           return (

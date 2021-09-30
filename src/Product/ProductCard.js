@@ -64,7 +64,7 @@ const ProductCard = ({ product }) => {
               <span>{formatDate(product.startDiscount)}- </span>
               <span>{formatDate(product.endDiscount)}</span>
             </div>
-            <Link to={`/products/${product.id}`}>Ətraflı</Link>
+            <Link  to={`/products/${product.id}`}>Ətraflı</Link>
           </a>
         </div>
         <div className="discount text-center">
