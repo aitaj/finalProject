@@ -1,66 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useCookies,Cookies  } from "react-cookie";
+import { loginUser } from "./actions";
 const Signin = ({ closeModal }) => {
   const [show, setShow] = useState(true);
   const [user, setUser] = useState({
-    email: "",
+    username: "",
     password: "",
   });
+  let location = useLocation();
   const [redirect, setRedirect] = useState(false);
-  const [cookies, setCookie] = useCookies(["jwt"]);
   const history = useHistory();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userInfo);
-
   const handleInputChange = (e, field) => {
     setUser({ ...user, [field]: e.target.value });
-    console.log(Cookies);
   };
   const handleClose = () => {
     setShow(false);
   };
-
   // useEffect(() => {
-  //   if (Object.keys(userInfo).length > 0) {
-  //     history.push("/");
+  //   if (localStorage.getItem("userInfo") !== null) {
+  //     history.push("/admin");
   //   }
+  //   history.push("/login");
   // }, [userInfo, history]);
 
-  // useEffect(() => {
-  //   if (!isEmpty(userInfo)) {
-  //     history.push("/");
-  //   }
-  // }, [userInfo, history]);
-
-  const handleSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    const response = await fetch("https://localhost:44349/api/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "localhost:3000",
-      },
-      credentials: "include",
-      body: JSON.stringify(user),
-    })
-      .then(function (response) {
-        return response.text();
-      })
-      .then(function (text) {
-        setCookie("jwt", JSON.parse(text).jwt);
-      });
-
-    setRedirect(true);
-    handleClose();
+  let from = (location.state) || {
+    from: { pathname: "/" },
   };
 
-  if (redirect) {
-    return <Redirect to="/" />;
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(loginUser(user));
+    if (from) {
+      history.push(from);
+    }
+    setUser({
+      username: "",
+      password: "",
+    });
+  };
+
   return (
     <>
       <Container className="mt-5">
@@ -79,8 +62,8 @@ const Signin = ({ closeModal }) => {
                   <div className="form-group mt-3">
                     <input
                       type="email"
-                      value={user.email}
-                      onChange={(e) => handleInputChange(e, "email")}
+                      value={user.username}
+                      onChange={(e) => handleInputChange(e, "username")}
                       className="form-control"
                       placeholder="E-mailinizi daxil edin"
                     />

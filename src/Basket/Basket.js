@@ -1,18 +1,17 @@
-import React, { useState,useEffect } from "react";
-import { Products } from "../Product/Products";
+import React, { useState, useEffect } from "react";
 import BasketItem from "./BasketItem";
 const Basket = () => {
   const products = JSON.parse(localStorage.getItem("basket"));
   let temp = 0;
   const countTotal = () => {
+   if(products!=null){
     products.forEach((element) => {
       temp = temp + element.elementPrice * element.elementQuantity;
     });
+   } 
     return temp;
   };
-  // useEffect(() => {
-  //   countTotal();
-  // }, []);
+
   return (
     <>
       <div className="container">
@@ -35,9 +34,10 @@ const Basket = () => {
                   </div>
                 </div>
               </div>
-              {products.map((pr) => {
-                return <BasketItem pr={pr}></BasketItem>;
-              })}
+              {products &&
+                products.map((pr) => {
+                  return <BasketItem pr={pr}></BasketItem>;
+                })}
               <div className="row">
                 <div className="col-md-3 offset-md-9">
                   <div className="total mt-3">
@@ -48,7 +48,7 @@ const Basket = () => {
               </div>
             </div>
             <div className="basket-mobile">
-              {products.map((pr) => {
+              {products&&products.map((pr) => {
                 return <BasketItem pr={pr}></BasketItem>;
               })}
             </div>

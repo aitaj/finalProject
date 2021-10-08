@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NvmseNhdZcYW0YIZWh3k4/e6URbctm1A7d7IBsg6ANMuHlzJJQNMoI6N1xCuhkK+OiR6QHQH+RAySxzcSg9fKQ==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\Lenovo Legion\\source\\repos\\FinalProjectP511\\Logo.API.csproj",
+  "dgSpecHash": "ZrojBP8GesWlHFvu7RSln6XSr79wdKblP4WnsxZFk2gcwLrwYZoIDS4bgplTCipsE1ijOrqrx8CH1vLoSGL2pQ==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\FinalProjectP511\\Logo.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo Legion\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Lenovo Legion\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
@@ -197,5 +197,15 @@
     "C:\\Users\\Lenovo Legion\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Lenovo Legion\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Unable to find project 'C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\Logo.Application\\Logo.Application.csproj'. Check that the project reference is valid and that the project file exists.",
+      "libraryId": "C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\Logo.Application\\Logo.Application.csproj",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

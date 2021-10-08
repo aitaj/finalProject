@@ -73,7 +73,7 @@ const ModalCompany = ({ closeModal, item }) => {
         <Modal show={true} onHide={closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>
-              {Object.keys(item).length > 0 ? "Update" : "Add"} Material
+              {Object.keys(item).length > 0 ? "Update" : "Add"} Company
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -86,14 +86,6 @@ const ModalCompany = ({ closeModal, item }) => {
                 value={formData.name}
                 onChange={(e) => handleChangeInp(e, "name")}
               />
-              {/* <input
-                type="text"
-                name="ImagePath"
-                className="form-control mt-2"
-                placeholder="imagePath"
-                value={formData.imagePath}
-                onChange={(e) => handleChangeInp(e, "imagePath")}
-              /> */}
               <input
                 type="file"
                 accept="image/*"

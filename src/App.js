@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+  useLocation,
+} from "react-router-dom";
 import React, { useState, useEffect } from "react";
 // const OtherComponent = React.lazy(() => import("./OtherComponent"));
 import Home from "./pages/Home";
@@ -27,91 +33,152 @@ import ProductImage from "./admin/pages/ProductImage/ProductImage";
 import Company from "./admin/pages/Company/Company";
 import CompanyDetailed from "./admin/pages/Company/CompanyDetailed";
 import ProductWithDetails from "./pages/ProductWithDetails";
+import SecondHandProductDetailed from "./admin/pages/SecondHand/SecondHandProductDetailed";
+import SecondHandProduct from "./admin/pages/SecondHand/SecondHandProduct";
+import SecondHandPage from "./pages/SecondHandPage";
 function App() {
-  const [name, setName] = useState("");
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("https://localhost:44349/api/user", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-      const content = await response.json();
-      setName(content.name);
-      console.log(response);
-    })();
-  }, []);
+  const ProtectedRoute = ({ location, children, ...rest }) => {
+    return localStorage.getItem("userInfo") !== null ? (
+      <Route {...rest}>{children}</Route>
+    ) : (
+      <Redirect
+        to={{
+          pathname: "/login",
+          state: { from: location },
+        }}
+      />
+    );
+    //   console.log(location.state)
+    // return localStorage.getItem("userInfo") !== null ? (
+    //   <Route {...rest}>{children}</Route>
+    // ) : (
+    //   <Redirect
+    //     to={{
+    //       pathname: "/login",
+    //       state: { from: location },
+    //     }}
+    //   />
+    // );
+  };
+
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/" component={Home}></Route>
+          <Route exact path="/category:10/subcategory:46" component={SecondHandPage}></Route>
           <Route exact path="/basket" component={BasketPage}></Route>
           <Route path="/login" component={Signin}></Route>
           <Route path="/register" component={Register}></Route>
+          <Route path="/secondhandproducts" component={SecondHandPage}></Route>
           <Route path="/products/:id" component={ProductWithDetails}></Route>
           <Route exact path="/admin/" component={HomeAdmin}></Route>
-          <Route exact path="/admin/categories" component={Category}></Route>
-          <Route exact path="/admin/sizes" component={Size}></Route>
-          <Route exact path="/admin/locations" component={Location}></Route>
-          <Route exact path="/admin/brends" component={Brend}></Route>
-          <Route exact path="/admin/colours" component={Colour}></Route>
-          <Route exact path="/admin/materials" component={Material}></Route>
-          <Route exact path="/admin/products" component={ProductAdmin}></Route>
-          <Route
+          <ProtectedRoute
+            exact
+            path="/admin/categories"
+            component={Category}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/admin/sizes"
+            component={Size}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/admin/locations"
+            component={Location}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/admin/brends"
+            component={Brend}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/admin/colours"
+            component={Colour}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/admin/materials"
+            component={Material}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/admin/products"
+            component={ProductAdmin}
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path="/admin/productimages"
             component={ProductImage}
-          ></Route>
-          <Route exact path="/admin/companies" component={Company}></Route>
-          <Route
+          ></ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/admin/companies"
+            component={Company}
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path="/admin/subcategories"
             component={Subcategory}
-          ></Route>
-          <Route path={`/admin/sizes/:id`} component={SizeDetailed} />
-          <Route path={`/admin/locations/:id`} component={LocationDetailed} />
-          <Route
+          ></ProtectedRoute>{" "}
+          <ProtectedRoute
+            exact
+            path="/admin/secondhandproducts"
+            component={SecondHandProduct}
+          ></ProtectedRoute>
+          <ProtectedRoute path={`/admin/sizes/:id`} component={SizeDetailed} />
+          <ProtectedRoute
+            path={`/admin/locations/:id`}
+            component={LocationDetailed}
+          />
+          <ProtectedRoute
             exact
             path="/admin/subcategories/:id"
             component={SubcategoryDetailed}
-          ></Route>
-          <Route
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path="/admin/brends/:id"
             component={BrendDetailed}
-          ></Route>
-          <Route
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path="/admin/colours/:id"
             component={ColourDetailed}
-          ></Route>
-          <Route
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path="/admin/materials/:id"
             component={MaterialDetailed}
-          ></Route>
-          <Route
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path="/admin/categories/:id"
             component={CategoryDetailed}
-          ></Route>
-          <Route
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path="/admin/products/:id"
             component={ProductDetailed}
-          ></Route>
-          <Route
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path="/admin/productimages/:id"
             component={ProductImageDetailed}
-          ></Route>
-          <Route
+          ></ProtectedRoute>
+          <ProtectedRoute
             exact
             path="/admin/companies/:id"
             component={CompanyDetailed}
-          ></Route>
+          ></ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/admin/secondhandproducts/:id"
+            component={SecondHandProductDetailed}
+          ></ProtectedRoute>
+          <Route path="*" component={() => "404 NOT FOUND"}></Route>
         </Switch>
       </Router>
     </>

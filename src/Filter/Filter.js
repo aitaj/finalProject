@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "../Product/Product";
 import { useDispatch, useSelector } from "react-redux";
+import ReactPaginate from "react-paginate";
 const Filter = ({ products }) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [isFiltered, setIsFiltered] = useState(false);
@@ -40,6 +41,12 @@ const Filter = ({ products }) => {
     setFilteredProducts(currentProducts);
     setIsFiltered(true);
     console.log(filteredProducts);
+  };
+  const handlePageClick = (data) => {
+    setIsClicked(true);
+    let currentPage = data.selected + 1;
+    setItems(products.slice(data.selected * 6, data.selected * 6 + 6));
+    console.log(isClicked);
   };
   return (
     <>
@@ -143,8 +150,25 @@ const Filter = ({ products }) => {
             {isFiltered ? (
               <Product products={filteredProducts} isFiltered={isFiltered} />
             ) : (
-              <Product products={products} isFiltered={isFiltered}/>
+              <Product products={products} isFiltered={isFiltered} />
             )}
+            <ReactPaginate
+              breakLabel={"..."}
+              pageCount={10}
+              marginPagesDisplayed={3}
+              pageRangeDisplayed={3}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination d-flex justify-content-center"}
+              pageClassName={"page-item"}
+              pageLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              prevClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              breakClassName={"page-item"}
+              breakLinkClassName={"page-link"}
+              activeClassName={"active"}
+            ></ReactPaginate>
           </div>
         </div>
       </div>

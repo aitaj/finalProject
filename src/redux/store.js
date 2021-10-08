@@ -11,7 +11,17 @@ import { materialReducer } from "../admin/pages/Material/reducers";
 import { productReducer } from "../admin/pages/Product/reducers";
 import { productImageReducer } from "../admin/pages/ProductImage/reducers";
 import { companyReducer } from "../admin/pages/Company/reducers";
+import { loginUser } from "../Authorization/Signin/actions";
+import { secondHandProductReducer } from "../admin/pages/SecondHand/reducers";
 
+
+const userInfoFromLocalStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : {};
+
+const initialState = {
+  userInfo: userInfoFromLocalStorage,
+};
 const reducers = combineReducers({
   categories: categoryReducer,
   sizes: sizeReducer,
@@ -23,10 +33,13 @@ const reducers = combineReducers({
   products: productReducer,
   productImages: productImageReducer,
   companies: companyReducer,
+  userInfo:loginUser,
+  secondHandProducts:secondHandProductReducer
 });
 
 const store = createStore(
   reducers,
+  initialState,
   composeWithDevTools(applyMiddleware(thunk))
 );
 

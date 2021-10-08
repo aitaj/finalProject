@@ -3067,27 +3067,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
-      },
-      "Logo.Application/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "BCrypt.Net-Next": "4.0.2",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.19",
-          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
-          "Microsoft.AspNetCore.Identity": "2.2.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.19",
-          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.18",
-          "Microsoft.EntityFrameworkCore": "5.0.9",
-          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.9",
-          "System.IdentityModel.Tokens.Jwt": "6.12.2"
-        },
-        "compile": {
-          "bin/placeholder/Logo.Application.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Logo.Application.dll": {}
-        }
       }
     }
   },
@@ -9635,17 +9614,12 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
-    },
-    "Logo.Application/1.0.0": {
-      "type": "project",
-      "path": "../Logo.Application/Logo.Application.csproj",
-      "msbuildProject": "../Logo.Application/Logo.Application.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "BCrypt.Net-Next >= 4.0.2",
-      "Logo.Application >= 1.0.0",
+      "C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\Logo.Application\\Logo.Application.csproj",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.19",
       "Microsoft.AspNetCore.Identity >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.19",
@@ -9667,11 +9641,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lenovo Legion\\source\\repos\\FinalProjectP511\\Logo.API.csproj",
+      "projectUniqueName": "C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\FinalProjectP511\\Logo.API.csproj",
       "projectName": "Logo.API",
-      "projectPath": "C:\\Users\\Lenovo Legion\\source\\repos\\FinalProjectP511\\Logo.API.csproj",
+      "projectPath": "C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\FinalProjectP511\\Logo.API.csproj",
       "packagesPath": "C:\\Users\\Lenovo Legion\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lenovo Legion\\source\\repos\\FinalProjectP511\\obj\\",
+      "outputPath": "C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\FinalProjectP511\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Lenovo Legion\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9688,8 +9662,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Lenovo Legion\\source\\repos\\Logo.Application\\Logo.Application.csproj": {
-              "projectPath": "C:\\Users\\Lenovo Legion\\source\\repos\\Logo.Application\\Logo.Application.csproj"
+            "C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\Logo.Application\\Logo.Application.csproj": {
+              "projectPath": "C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\Logo.Application\\Logo.Application.csproj"
             }
           }
         }
@@ -9784,5 +9758,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Unable to find project 'C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\Logo.Application\\Logo.Application.csproj'. Check that the project reference is valid and that the project file exists.",
+      "libraryId": "C:\\Users\\Lenovo Legion\\Desktop\\finalproject\\Logo.Application\\Logo.Application.csproj",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

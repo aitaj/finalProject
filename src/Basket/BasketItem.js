@@ -52,13 +52,13 @@ const BasketItem = ({ pr }) => {
               {" "}
               <div className="row w-100">
                 {" "}
-                <div className="col-md-4 ">
+                <div className="col-md-4 text-center my-2">
                   <p>{pr.elementName}</p>
                 </div>
-                <div className="col-md-2 p-0">
+                <div className="col-md-2 p-0 text-center">
                   <p>{pr.elementDiscount}%</p>
                 </div>
-                <div className="col-md-2 pl-0">
+                <div className="col-md-2 pl-0 text-center">
                   <p>{pr.elementPrice} AZN</p>
                 </div>
                 <div className="col-md-1">
@@ -68,10 +68,10 @@ const BasketItem = ({ pr }) => {
                     <a onClick={() => handleIncrease(countItem)}>+</a>
                   </div>
                 </div>
-                <div className="col-md-1">
+                <div className="col-md-1 text-center my-3">
                   {(pr.elementPrice * countItem).toFixed(2)}
                 </div>
-                <div className="col-md-1">
+                <div className="col-md-1 text-center">
                   <a onClick={handleRemoveItem} className={pr.elementId}>
                     <i className="fas fa-times"></i>
                   </a>

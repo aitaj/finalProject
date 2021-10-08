@@ -1,9 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 const ProductCard = ({ product }) => {
   function beforeDiscount(currentPrice, discount) {
     return (currentPrice * 100) / (100 - discount);
   }
+
+  const userInfo = localStorage.getItem("userInfo");
+
+  const history = useHistory();
+  const handleClickDetails = ( id) => {
+    if (userInfo == null) {
+      history.push("/login");
+    }
+    history.push(`/products/${id}`);
+  };
   // console.log(product)
   const formatDate = (date) => {
     const datetime = new Date(date);
@@ -42,7 +54,14 @@ const ProductCard = ({ product }) => {
     <div className="col-md-4 col-6">
       <div className="product-card mt-2">
         <div className="custom-card-header">
-          <img className="img-fluid" src={product.productImages[0]!=null?product.productImages[0].imagePath:""} />
+          <img
+            className="img-fluid"
+            src={
+              product.productImages[0] != null
+                ? product.productImages[0].imagePath
+                : ""
+            }
+          />
         </div>
         <div className="custom-card-body text-center">
           <a>
@@ -61,10 +80,10 @@ const ProductCard = ({ product }) => {
               <p className="current-price"> {product.price.toFixed(2)}AZN</p>
             </div>
             <div className="discount-date">
-              <span>{formatDate(product.startDiscount)}- </span>
+              <span>Son gün- </span>
               <span>{formatDate(product.endDiscount)}</span>
             </div>
-            <Link  to={`/products/${product.id}`}>Ətraflı</Link>
+            <Link onClick={() => handleClickDetails(product.id)}>Ətraflı</Link>
           </a>
         </div>
         <div className="discount text-center">

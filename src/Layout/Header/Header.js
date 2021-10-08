@@ -29,6 +29,7 @@ const Header = () => {
   };
   const takeClickedCategory = (id) => {
     setCategoryClicked(id);
+    console.log(categoryClicked)
   };
   return (
     <>
@@ -100,7 +101,7 @@ const Header = () => {
                     className="basket d-flex justify-content-center  align-items-center"
                   >
                     <i className="fas fa-shopping-basket"></i>
-                    <span>{products.length}</span>
+                    <span>{products && products.length}</span>
                     <p>Səbətim</p>
                   </Link>
                 </div>
@@ -128,7 +129,7 @@ const Header = () => {
                       return (
                         <li className="category-main">
                           <Link
-                            to="/"
+                            to={`/category:${item.id}`}
                             key={index}
                             target="_self"
                             className="main-link"
@@ -143,7 +144,7 @@ const Header = () => {
                                 return (
                                   <li className="subcategory-li">
                                     <Link
-                                      to={`category:${item.name}/subcategory:${subCategory.name}`}
+                                      to={`/category:${item.id}/subcategory:${subCategory.id}`}
                                       className="subcategory"
                                     >
                                       {subCategory.name}
@@ -175,7 +176,7 @@ const Header = () => {
               </a>
               <Link className="basket" to="/basket">
                 <i className="fas  fa-shopping-basket"></i>
-                <span>{products.length}</span>
+                <span>{products&&products.length}</span>
               </Link>
               <Link to="/login">
                 <i className="fas fa-sign-in-alt"></i>

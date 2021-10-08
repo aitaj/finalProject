@@ -15,7 +15,7 @@ export default function Sidebar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Dashboard</h3>
             <ul className="sidebarList">
-              <Link to="/" className="link">
+              <Link to="/admin" className="link">
                 <li className="sidebarListItem">
                   <LineStyle className="sidebarIcon" />
                   Home
@@ -37,7 +37,7 @@ export default function Sidebar() {
               <Link to="/admin/locations" className="link">
                 <li className="sidebarListItem">
                   <PermIdentity className="sidebarIcon" />
-                Locations
+                  Locations
                 </li>
               </Link>
               <Link to="/admin/subcategories" className="link">
@@ -82,9 +82,14 @@ export default function Sidebar() {
                   Companies
                 </li>
               </Link>
+              <Link to="/admin/secondhandproducts" className="link">
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Secondhand Products
+                </li>
+              </Link>
             </ul>
           </div>
-   
         </div>
       </div>
     </div>
