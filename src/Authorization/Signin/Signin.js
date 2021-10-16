@@ -10,7 +10,6 @@ const Signin = ({ closeModal }) => {
     password: "",
   });
   let location = useLocation();
-  const [redirect, setRedirect] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userInfo);
@@ -20,24 +19,20 @@ const Signin = ({ closeModal }) => {
   const handleClose = () => {
     setShow(false);
   };
-  // useEffect(() => {
-  //   if (localStorage.getItem("userInfo") !== null) {
-  //     history.push("/admin");
-  //   }
-  //   history.push("/login");
-  // }, [userInfo, history]);
-
-  let from = (location.state) || {
+  let { from } = location.state || {
     from: { pathname: "/" },
   };
+  useEffect(() => {
+    if (localStorage.getItem("userInfo") !== null) {
+      history.push(from);
+    }
+  }, [userInfo, history]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     dispatch(loginUser(user));
-    if (from) {
-      history.push(from);
-    }
+
     setUser({
       username: "",
       password: "",
@@ -78,9 +73,9 @@ const Signin = ({ closeModal }) => {
                     />
                   </div>
 
-                  {/* {userInfo.error && (
+                  {userInfo.error && (
                     <p className="text-danger">{userInfo.error}</p>
-                  )} */}
+                  )}
                 </Form>
               </Modal.Body>
               <Modal.Footer>

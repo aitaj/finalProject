@@ -52,7 +52,7 @@ const BasketItem = ({ pr }) => {
               {" "}
               <div className="row w-100">
                 {" "}
-                <div className="col-md-4 text-center my-2">
+                <div className="col-md-4 text-center">
                   <p>{pr.elementName}</p>
                 </div>
                 <div className="col-md-2 p-0 text-center">
@@ -68,7 +68,7 @@ const BasketItem = ({ pr }) => {
                     <a onClick={() => handleIncrease(countItem)}>+</a>
                   </div>
                 </div>
-                <div className="col-md-1 text-center my-3">
+                <div className="col-md-1 text-center">
                   {(pr.elementPrice * countItem).toFixed(2)}
                 </div>
                 <div className="col-md-1 text-center">

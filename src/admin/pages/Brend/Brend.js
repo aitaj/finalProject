@@ -3,7 +3,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBrend, fetchBrends, } from "./actions/index";
+import { deleteBrend, fetchBrends } from "./actions/index";
 import ModalBrend from "./ModalBrend";
 export default function Brend() {
   const { brends } = useSelector((state) => state.brends);
@@ -14,6 +14,8 @@ export default function Brend() {
     dispatch(fetchBrends());
   }, []);
   const handleDelete = (id) => {
+    document.querySelector(".confirm-bg").style.display = "none";
+    document.querySelector(".container-custom-popup ").style.display = "none";
     dispatch(deleteBrend(id));
   };
   const handleEdit = (item) => {
@@ -29,6 +31,22 @@ export default function Brend() {
   const handleAdd = () => {
     setShowModal(true);
   };
+
+  const [delTask, setDelTask] = useState(false);
+  const [brendId, setBrendId] = useState(0);
+  const handleConfirmationBox = (id) => {
+    setBrendId(id);
+    if (!delTask) {
+      document.querySelector(".confirm-bg").style.display = "flex";
+      document.querySelector(".container-custom-popup ").style.display = "flex";
+      setDelTask(true);
+    } else {
+      document.querySelector(".confirm-bg").style.display = "none";
+      document.querySelector(".container-custom-popup ").style.display = "none";
+      setDelTask(false);
+    }
+  };
+
   return (
     <>
       <div className="row">
@@ -79,9 +97,7 @@ export default function Brend() {
                               Detallar
                             </Link>
                             <a
-                              onClick={() => {
-                                handleDelete(brend.id);
-                              }}
+                              onClick={() => handleConfirmationBox(brend.id)}
                               className="delete"
                             >
                               Sil
@@ -98,11 +114,25 @@ export default function Brend() {
         </div>
       </div>
       {showModal && (
-        <ModalBrend
-          closeModal={handleCloseModal}
-          item={brend}
-        ></ModalBrend>
+        <ModalBrend closeModal={handleCloseModal} item={brend}></ModalBrend>
       )}
+      <div className="container-custom-popup ">
+        <div className="confirmation-text mb-4">
+        Silmək istədiyinizə əminsinizmi?
+        </div>
+        <div className="button-container">
+          <a className="cancel-button" onClick={() => handleConfirmationBox()}>
+            Xeyr
+          </a>
+          <a
+            className="confirmation-button"
+            onClick={() => handleDelete(brendId)}
+          >
+           Bəli
+          </a>
+        </div>
+      </div>
+      <div className="confirm-bg" onClick={() => handleConfirmationBox()}></div>
     </>
   );
 }

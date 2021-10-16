@@ -90,14 +90,7 @@ const ModalProductImage = ({ closeModal, item }) => {
                 value={formData.name}
                 onChange={(e) => handleChangeInp(e, "name")}
               />
-              <input
-                type="text"
-                name="ImagePath"
-                className="form-control mt-2"
-                placeholder="imagePath"
-                value={formData.imagePath}
-                onChange={(e) => handleChangeInp(e, "imagePath")}
-              />
+             
               <input
                 type="file"
                 accept="image/*"

@@ -40,14 +40,8 @@ const Filter = ({ products }) => {
     );
     setFilteredProducts(currentProducts);
     setIsFiltered(true);
-    console.log(filteredProducts);
   };
-  const handlePageClick = (data) => {
-    setIsClicked(true);
-    let currentPage = data.selected + 1;
-    setItems(products.slice(data.selected * 6, data.selected * 6 + 6));
-    console.log(isClicked);
-  };
+
   return (
     <>
       <div className="container">
@@ -119,7 +113,7 @@ const Filter = ({ products }) => {
                     />
                   </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                   <div className="col-12">
                     <div className="brends mt-3 ">
                       <label>Brend</label>
@@ -134,7 +128,7 @@ const Filter = ({ products }) => {
                       </select>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="row">
                   <div className="col-12 mt-3">
                     <a onClick={handleFilterForm} className="confirm mr-2">
@@ -150,25 +144,9 @@ const Filter = ({ products }) => {
             {isFiltered ? (
               <Product products={filteredProducts} isFiltered={isFiltered} />
             ) : (
-              <Product products={products} isFiltered={isFiltered} />
+              <Product products={products} isFiltered={isFiltered}/>
             )}
-            <ReactPaginate
-              breakLabel={"..."}
-              pageCount={10}
-              marginPagesDisplayed={3}
-              pageRangeDisplayed={3}
-              onPageChange={handlePageClick}
-              containerClassName={"pagination d-flex justify-content-center"}
-              pageClassName={"page-item"}
-              pageLinkClassName={"page-link"}
-              nextClassName={"page-item"}
-              nextLinkClassName={"page-link"}
-              prevClassName={"page-item"}
-              previousLinkClassName={"page-link"}
-              breakClassName={"page-item"}
-              breakLinkClassName={"page-link"}
-              activeClassName={"active"}
-            ></ReactPaginate>
+        
           </div>
         </div>
       </div>

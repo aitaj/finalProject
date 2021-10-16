@@ -33,9 +33,12 @@ import ProductImage from "./admin/pages/ProductImage/ProductImage";
 import Company from "./admin/pages/Company/Company";
 import CompanyDetailed from "./admin/pages/Company/CompanyDetailed";
 import ProductWithDetails from "./pages/ProductWithDetails";
+import ProductWithDetailsAdmin from "./admin/pages/Product/ProductWithDetails";
 import SecondHandProductDetailed from "./admin/pages/SecondHand/SecondHandProductDetailed";
 import SecondHandProduct from "./admin/pages/SecondHand/SecondHandProduct";
+import SecondHandProductsPage from "./pages/SecondHandProductsPage";
 import SecondHandPage from "./pages/SecondHandPage";
+import SigninAdmin from "./Authorization/Signin/SigninAdmin/SigninAdmin";
 function App() {
   const ProtectedRoute = ({ location, children, ...rest }) => {
     return localStorage.getItem("userInfo") !== null ? (
@@ -43,22 +46,11 @@ function App() {
     ) : (
       <Redirect
         to={{
-          pathname: "/login",
+          pathname: "/admin/login",
           state: { from: location },
         }}
       />
     );
-    //   console.log(location.state)
-    // return localStorage.getItem("userInfo") !== null ? (
-    //   <Route {...rest}>{children}</Route>
-    // ) : (
-    //   <Redirect
-    //     to={{
-    //       pathname: "/login",
-    //       state: { from: location },
-    //     }}
-    //   />
-    // );
   };
 
   return (
@@ -66,17 +58,40 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home}></Route>
-          <Route exact path="/category:10/subcategory:46" component={SecondHandPage}></Route>
+          <Route
+            exact
+            path="/category:10/subcategory:46"
+            component={SecondHandPage}
+          ></Route>
+          <Route
+            exact
+            path="/category:10/subcategory:47"
+            component={SecondHandProductsPage}
+          ></Route>
           <Route exact path="/basket" component={BasketPage}></Route>
-          <Route path="/login" component={Signin}></Route>
+          <Route exact path="/login" component={Signin}></Route>
+          <Route exact path="/admin/login" component={SigninAdmin}></Route>
           <Route path="/register" component={Register}></Route>
           <Route path="/secondhandproducts" component={SecondHandPage}></Route>
+          <Route
+            path="/secondhandproductsall"
+            component={SecondHandProductsPage}
+          ></Route>
           <Route path="/products/:id" component={ProductWithDetails}></Route>
-          <Route exact path="/admin/" component={HomeAdmin}></Route>
+          <ProtectedRoute
+            exact
+            path="/admin/"
+            component={HomeAdmin}
+          ></ProtectedRoute>
           <ProtectedRoute
             exact
             path="/admin/categories"
             component={Category}
+          ></ProtectedRoute>{" "}
+          <ProtectedRoute
+            exact
+            path="/admin/products/:id"
+            component={ProductWithDetailsAdmin}
           ></ProtectedRoute>
           <ProtectedRoute
             exact

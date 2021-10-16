@@ -11,7 +11,7 @@ const Partner = ({ companies }) => {
       <OwlCarousel
         className="owl-theme"
         autoplayTimeout={7000}
-        items={6}
+        items={5}
         autoplay={true}
         loop
         margin={10}

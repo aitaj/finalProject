@@ -1,6 +1,7 @@
 #header {
   @include desktop {
     .desktop {
+      height: 450px;
       img {
         max-width: 100%;
       }
@@ -227,8 +228,6 @@
       transition: all 0.3s;
       position: absolute;
       left: -400px;
-      animation-name: sidebarClose;
-      animation-duration: 2s;
       top: 50px;
       padding-top: 0px;
       z-index: 300;

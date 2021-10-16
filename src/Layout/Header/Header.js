@@ -29,7 +29,6 @@ const Header = () => {
   };
   const takeClickedCategory = (id) => {
     setCategoryClicked(id);
-    console.log(categoryClicked)
   };
   return (
     <>

@@ -50,6 +50,12 @@ const SecondHand = () => {
     if (formData.userName.length < 3) {
       setCurrentError("Istifadeçi adı 3 simvoldan az olmamalıdır");
     }
+    else if(formData.phone.length!=10||parseInt(formData.phone).toString().length!=10){
+      setCurrentError("Telefon nomresinin formati dogru deyil");
+    }
+    else if(!re.test(formData.email)){
+      setCurrentError("Email formati dogru deyil");
+    }
     else if(formData.productName.length < 3){
       setCurrentError("Məhsul adı 3 simvoldan az olmamalıdır");
     }
@@ -59,14 +65,18 @@ const SecondHand = () => {
     else if(formData.imageFile==null){
       setCurrentError("Məhsulun şəkli daxil olunmalıdır");
     }
-    else if(formData.phone.length!=10||parseInt(formData.phone).toString().length!=10){
-      setCurrentError("Telefon nomresinin formati dogru deyil");
-    }
-    else if(!re.test(formData.email)){
-      setCurrentError("Email formati dogru deyil");
-    }
     else{
       dispatch(addSecondHandProduct(formData));
+      setFormData({
+        productName: "",
+        imagePath: "",
+        userName: "",
+        phone: "",
+        productName: "",
+        email: "",
+        productDesc: "",
+        imageFile: null,
+      })
       setCurrentError("");
     }
   };

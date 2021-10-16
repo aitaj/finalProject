@@ -1,12 +1,13 @@
 .sidebar-custom {
+  height: 100%;
   .sidebar {
     flex: 1;
-    height: calc(100vh - 50px);
     position: sticky;
-    top: 50px;
+    top: 0px;
+    height: 740px;
   }
-
   .sidebarWrapper {
+    height: 100%;
     padding: 20px;
     color: $white;
     background-color: rgba(0, 0, 0, 0.772);

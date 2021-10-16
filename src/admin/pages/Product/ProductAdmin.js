@@ -3,13 +3,15 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Topbar from "../../components/Topbar/Topbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchProducts } from "./actions/index";
+import { fetchProducts } from "./actions/index";
 import ModalProduct from "./ModalProduct";
 import ProductCardAdmin from "./ProductCardAdmin";
 export default function Product() {
   const { products } = useSelector((state) => state.products);
   const [product, setProduct] = useState({});
   const [showModal, setShowModal] = useState(false);
+  ///
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts());
@@ -70,7 +72,10 @@ export default function Product() {
                   {products.map((product) => {
                     return (
                       <li>
-                        <ProductCardAdmin productItem={product} />
+                        <ProductCardAdmin
+                          key={product.id}
+                          productItem={product}
+                        />
                       </li>
                     );
                   })}

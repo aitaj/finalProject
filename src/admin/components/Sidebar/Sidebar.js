@@ -36,7 +36,7 @@ export default function Sidebar() {
               </Link>
               <Link to="/admin/locations" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <Storefront className="sidebarIcon" />
                   Locations
                 </li>
               </Link>

@@ -77,14 +77,13 @@ const ModalProduct = ({ closeModal, item }) => {
     dispatch(fetchSizes());
   }, []);
 
-  const handleChangeInp = (e, field, parse = false,isFloat=false) => {
-    if (parse) {
+  const handleChangeInp = (e, field, parse = false, isFloat = false) => {
+    if (parse&&!isFloat) {
       setFormData({ ...formData, [field]: parseInt(e.target.value) });
-    }else if (isFloat) {
-      setFormData({ ...formData, [field]: parseFloat(e.target.value).toFixed(2) });
-      console.log(formData)
-    }
-    else {
+    } else if (!parse&&isFloat) {
+      setFormData({ ...formData, [field]: parseFloat(e.target.value) });
+      console.log(formData);
+    } else {
       setFormData({
         ...formData,
         [field]: e.target.value,
@@ -139,7 +138,7 @@ const ModalProduct = ({ closeModal, item }) => {
                 className="form-control"
                 placeholder="Price"
                 value={formData.price}
-                onChange={(e) => handleChangeInp(e, "price", false,true)}
+                onChange={(e) => handleChangeInp(e, "price", false, true)}
               />{" "}
               <label for="startDiscount">Endirim başlanğıc tarixi</label>
               <input

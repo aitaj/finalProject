@@ -9,6 +9,8 @@ const ProductCardAdmin = ({ productItem }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const handleDelete = (id) => {
+    document.querySelector(".confirm-bg").style.display = "none";
+    document.querySelector(".container-custom-popup ").style.display = "none";
     dispatch(deleteProduct(id));
   };
   const handleEdit = (item) => {
@@ -23,10 +25,23 @@ const ProductCardAdmin = ({ productItem }) => {
     setShowModal(false);
     setProduct({});
   };
+  const [delTask, setDelTask] = useState(false);
+  const [productId, setProductId] = useState(0);
+  const handleConfirmationBox = (id) => {
+    setProductId(id);
+    if (!delTask) {
+      document.querySelector(".confirm-bg").style.display = "flex";
+      document.querySelector(".container-custom-popup ").style.display = "flex";
+      setDelTask(true);
+    } else {
+      document.querySelector(".confirm-bg").style.display = "none";
+      document.querySelector(".container-custom-popup ").style.display = "none";
+      setDelTask(false);
+    }
+  };
   return (
     <>
       {" "}
-      
       <div className="row">
         <div className="col-3">
           {" "}
@@ -69,7 +84,7 @@ const ProductCardAdmin = ({ productItem }) => {
           </Link>
           <a
             onClick={() => {
-              handleDelete(productItem.id);
+              handleConfirmationBox(productItem.id);
             }}
             className="delete"
           >
@@ -83,6 +98,23 @@ const ProductCardAdmin = ({ productItem }) => {
           item={product}
         ></ModalProduct>
       )}
+      <div className="container-custom-popup ">
+        <div className="confirmation-text mb-4">
+          Silmək istədiyinizə əminsinizmi?
+        </div>
+        <div className="button-container">
+          <a className="cancel-button" onClick={() => handleConfirmationBox()}>
+            Xeyr
+          </a>
+          <a
+            className="confirmation-button"
+            onClick={() => handleDelete(productId)}
+          >
+            Bəli
+          </a>
+        </div>
+      </div>
+      <div className="confirm-bg" onClick={() => handleConfirmationBox()}></div>
     </>
   );
 };

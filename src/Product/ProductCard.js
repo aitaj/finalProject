@@ -11,10 +11,13 @@ const ProductCard = ({ product }) => {
 
   const history = useHistory();
   const handleClickDetails = ( id) => {
-    if (userInfo == null) {
-      history.push("/login");
-    }
-    history.push(`/products/${id}`);
+    // if (userInfo == null) {
+    //   history.push("/login");
+    //   console.log("g")
+    // }
+    // else{
+      history.push(`/products/${id}`);
+    // }
   };
   // console.log(product)
   const formatDate = (date) => {

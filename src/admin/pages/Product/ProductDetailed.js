@@ -6,21 +6,8 @@ import Topbar from "../../components/Topbar/Topbar";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../Product/actions/index";
-const ProductDetailed = () => {
-  let { id } = useParams();
-  let location = useLocation();
-  const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-  id = parseInt(id);
-  let exactProduct = products.filter((p) => p.id == id);
-  const useQuery = () => {
-    return new URLSearchParams(location.search);
-  };
-  const product = exactProduct[0];
-  let query = useQuery();
+const ProductDetailed = ({product,id}) => {
+
   return (
     <>
       <div className="row">
@@ -39,32 +26,33 @@ const ProductDetailed = () => {
             <div className="product">
               <div className="productTitleContainer">
                 <h3 className="productTitle my-3">Detallı məlumat</h3>
-                <p className="productTitle">Ad :{product.name}</p>
-                <p className="productTitle">Bütün şəkillər</p>
-                {product.productImages.map((image) => {
+                <p className="productTitle">Ad :{product!=null?product.name:""}AZN</p>
+                <p className="productTitle">Qiymət :{product!=null?product.price:""}AZN</p>
+                <p className="productTitle">Bütün şəkillər:</p>
+                {product&&product.productImages.map((image) => {
                   return (
-                    <img className="product-image" src={image.imagePath} />
+                    <img className="product-image mr-2" src={image.imagePath} />
                   );
                 })}
 
-                <p className="productTitle">Ölçü :{product.size.name}</p>
+                <p className="productTitle mt-3">Ölçü :{product&&product.size.name}</p>
                 <p className="productTitle">
-                  Material :{product.material.name}
+                  Material :{product&&product.material.name}
                 </p>
-                <p className="productTitle">Yer :{product.location.name}</p>
-                <p className="productTitle">Haqqında :{product.description}</p>
-                <p className="productTitle">Endirim :{product.discount}%</p>
+                <p className="productTitle">Yer :{product&&product.location.name}</p>
+                <p className="productTitle">Haqqında :{product&&product.description}</p>
+                <p className="productTitle">Endirim :{product&&product.discount}%</p>
                 <p className="productTitle">
                   Endirim başlanğıc tarixi :
-                  {product.startDiscount.toString().slice(0, 10)}
+                  {product&&product.startDiscount.toString().slice(0, 10)}
                 </p>
                 <p className="productTitle">
-                  Endirim bitmə tarixi :{product.endDiscount.toString().slice(0, 10)}
+                  Endirim bitmə tarixi :{product&&product.endDiscount.toString().slice(0, 10)}
                 </p>
             
                 <p className="productTitle">
                   Əlavə edilmə tarixi :{" "}
-                  {product.createdDate != null
+                  {product&&product.createdDate != null
                     ? ` ${product.createdDate.substring(0, 10)}`
                     : "Təyin olunmayıb"}
                 </p>
