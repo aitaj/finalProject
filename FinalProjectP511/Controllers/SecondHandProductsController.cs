@@ -16,47 +16,45 @@ namespace Logo.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductImagesController : ControllerBase
+    public class SecondHandProductsController : ControllerBase
     {
+
         readonly LogoDbContext db;
         private readonly IWebHostEnvironment iWebHostEnvironment;
-        public ProductImagesController(LogoDbContext db)
+        public SecondHandProductsController(LogoDbContext db)
         {
             this.db = db;
         }
 
         [HttpGet]
-        [SwaggerOperation("Butun locationlarin siyahisi")]
+        [SwaggerOperation("Butun ikinci el esyalarin siyahisi")]
         public async Task<IActionResult> Get()
         {
-            var data = await db.ProductImages.Where(s => s.DeletedDate == null).ToListAsync();
-            foreach (var item in data)
-            {
-                item.Product = db.Products.FirstOrDefault(p => p.Id == item.ProductId);
-            }
+            var data = await db.SecondHandProducts.Where(s => s.DeletedDate == null).ToListAsync();
+          
             return Ok(data);
         }
 
         [HttpGet("{id:int:min(1)}")]
-        [SwaggerOperation("Id-ye gore bir shekil")]
+        [SwaggerOperation("Id-ye gore bir esya")]
         public async Task<IActionResult> Get(int id)
         {
-            var data = await db.ProductImages.FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);
-            data.Product = await db.Products.FirstOrDefaultAsync(p => p.Id == data.ProductId);
+            var data = await db.SecondHandProducts.FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);
             return Ok(data);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ProductImage model)
+        [AllowAnonymous]
+        public async Task<IActionResult> Add(SecondHandProduct model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-          
 
-            await db.ProductImages.AddAsync(model);
+
+            await db.SecondHandProducts.AddAsync(model);
             db.SaveChanges();
             return CreatedAtAction(nameof(Get), new
             {
@@ -65,7 +63,7 @@ namespace Logo.API.Controllers
         }
 
         [HttpPut("{id:int:min(1)}")]
-        public async Task<IActionResult> Edit(int id, ProductImage model)
+        public async Task<IActionResult> Edit(int id, SecondHandProduct model)
         {
             if (id != model.Id)
             {
@@ -77,14 +75,16 @@ namespace Logo.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var entity = await db.ProductImages.FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);
+            var entity = await db.SecondHandProducts.FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);
 
             if (entity == null)
                 return NotFound();
-            model.Product = await db.Products.FirstOrDefaultAsync(p => p.Id == model.ProductId);
             entity.ImagePath = model.ImagePath;
-            entity.Name = model.Name;
-            entity.Product = model.Product;
+            entity.UserName = model.UserName;
+            entity.ProductName = model.ProductName;
+            entity.Email = model.Email;
+            entity.ProductDesc = model.ProductDesc;
+            entity.Phone = model.Phone;
             entity.CreatedByUserId = model.CreatedByUserId;
             entity.CreatedDate = model.CreatedDate;
             entity.DeletedDate = model.DeletedDate;
@@ -99,11 +99,11 @@ namespace Logo.API.Controllers
         public async Task<IActionResult> Remove(int id)
         {
 
-            var entity = await db.ProductImages.FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);
+            var entity = await db.SecondHandProducts.FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);
 
             if (entity == null)
                 return NotFound();
-            DeleteImage(entity.Name);
+            DeleteImage(entity.ProductName);
             entity.DeletedByUserId = 1;
             entity.DeletedDate = DateTime.Now;
 

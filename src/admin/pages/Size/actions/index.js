@@ -1,4 +1,4 @@
-import API from "../api/index";
+import API from "../../../api/index";
 import {
   FETCH_SIZES_FAIL,
   FETCH_SIZES_REQUEST,

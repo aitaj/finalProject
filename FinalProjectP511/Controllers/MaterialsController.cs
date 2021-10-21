@@ -1,5 +1,6 @@
 ﻿using Logo.Application.Models.DataContext;
 using Logo.Application.Models.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

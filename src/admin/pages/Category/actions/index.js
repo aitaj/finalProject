@@ -1,4 +1,4 @@
-import API from "../api/index";
+import API from "../../../api/index";
 import {
   FETCH_CATEGORIES_FAIL,
   FETCH_CATEGORIES_REQUEST,

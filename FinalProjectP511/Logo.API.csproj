@@ -29,9 +29,5 @@
     <ProjectReference Include="..\Logo.Application\Logo.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\" />
-  </ItemGroup>
-
 
 </Project>

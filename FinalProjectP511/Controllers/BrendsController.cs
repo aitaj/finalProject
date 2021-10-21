@@ -1,5 +1,6 @@
 ﻿using Logo.Application.Models.DataContext;
 using Logo.Application.Models.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -14,6 +15,7 @@ namespace Logo.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class BrendsController : ControllerBase
     {
         readonly LogoDbContext db;

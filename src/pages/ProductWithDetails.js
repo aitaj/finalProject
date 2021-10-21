@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import Header from "../Layout/Header/Header";
-import Footer from "../Layout/Footer/Footer";
-import ProductDetails from "../Product/ProductDetails";
+import ProductDetails from "../components/Product/ProductDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { fetchProducts } from "../admin/pages/Product/actions";

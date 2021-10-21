@@ -1,4 +1,4 @@
-import API from "../api/index";
+import API from "../../../api/index";
 import {
   FETCH_PRODUCTIMAGES_FAIL,
   FETCH_PRODUCTIMAGES_REQUEST,

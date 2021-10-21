@@ -1,25 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Product from "../Product/Product";
-import { useDispatch, useSelector } from "react-redux";
-import ReactPaginate from "react-paginate";
 const Filter = ({ products }) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [isFiltered, setIsFiltered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [input, setInput] = useState({
-    minPrice: 0,
-    maxPrice: 5000,
-    minPercent: 0,
-    maxPercent: 99,
+    minPrice: "",
+    maxPrice: "",
+    minPercent: "",
+    maxPercent: "",
   });
-  const [brend, setBrend] = useState();
-  const [items, setItems] = useState([]);
-  const dispatch = useDispatch();
-  let currentProducts;
 
-  const handleBrendSelect = (e) => {
-    setBrend(e.target.value);
-  };
+  let currentProducts;
   const handleOpenFilter = () => {
     setIsClicked(!isClicked);
   };
@@ -28,6 +20,7 @@ const Filter = ({ products }) => {
       return p.brend.name;
     })
     .filter((v, i, a) => a.indexOf(v) === i);
+
   const inputChange = (e, field) => {
     setInput({ ...input, [field]: parseFloat(e.target.value) });
   };
@@ -113,22 +106,6 @@ const Filter = ({ products }) => {
                     />
                   </div>
                 </div>
-                {/* <div className="row">
-                  <div className="col-12">
-                    <div className="brends mt-3 ">
-                      <label>Brend</label>
-                      <select
-                        className="brends"
-                        value={brend}
-                        onChange={handleBrendSelect}
-                      >
-                        {brends.map((brend) => {
-                          return <option value={brend}>{brend}</option>;
-                        })}
-                      </select>
-                    </div>
-                  </div>
-                </div> */}
                 <div className="row">
                   <div className="col-12 mt-3">
                     <a onClick={handleFilterForm} className="confirm mr-2">
@@ -144,9 +121,8 @@ const Filter = ({ products }) => {
             {isFiltered ? (
               <Product products={filteredProducts} isFiltered={isFiltered} />
             ) : (
-              <Product products={products} isFiltered={isFiltered}/>
+              <Product products={products} isFiltered={isFiltered} />
             )}
-        
           </div>
         </div>
       </div>

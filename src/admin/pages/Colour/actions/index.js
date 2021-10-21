@@ -1,4 +1,4 @@
-import API from "../api/index";
+import API from "../../../api/index";
 import {
   FETCH_COLOURS_FAIL,
   FETCH_COLOURS_REQUEST,

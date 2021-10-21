@@ -1,4 +1,4 @@
-import API from "../api/index";
+import API from "../../../api/index";
 import {
   FETCH_LOCATIONS_FAIL,
   FETCH_LOCATIONS_REQUEST,

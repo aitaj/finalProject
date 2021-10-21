@@ -1,5 +1,6 @@
 ﻿using Logo.Application.Models.DataContext;
 using Logo.Application.Models.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace Logo.API.Controllers
 
         [HttpGet]
         [SwaggerOperation("Butun alt kategoriyalarin siyahisi")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             var data = await db.SubCategories

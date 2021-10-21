@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Layout/Header/Header";
 import Footer from "../Layout/Footer/Footer";
-import Product from "../Product/Product";
 import Partner from "../components/Partners/Partner";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../admin/pages/Product/actions";
 import { fetchCompanies } from "../admin/pages/Company/actions";
-import  Filter  from "../Filter/Filter";
+import  Filter  from "../components//Filter/Filter";
 const Home = () => {
   const { products } = useSelector((state) => state.products);
   const { companies } = useSelector((state) => state.companies);

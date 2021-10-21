@@ -2,6 +2,7 @@
 using Logo.Application;
 using Logo.Application.Models.DataContext;
 using Logo.Application.Models.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -26,6 +27,7 @@ namespace Logo.API.Controllers
 
         [HttpGet]
         [SwaggerOperation("Butun kategoriyalarin siyahisi")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             var data = await db.Categories.Where(s => s.DeletedDate == null).ToListAsync();

@@ -10,13 +10,13 @@ const ProductCard = ({ product }) => {
   const userInfo = localStorage.getItem("userInfo");
 
   const history = useHistory();
-  const handleClickDetails = ( id) => {
+  const handleClickDetails = (id) => {
     // if (userInfo == null) {
     //   history.push("/login");
     //   console.log("g")
     // }
     // else{
-      history.push(`/products/${id}`);
+    history.push(`/products/${id}`);
     // }
   };
   // console.log(product)

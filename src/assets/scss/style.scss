@@ -3,11 +3,11 @@
 @import "./common.scss";
 @import "../../Layout/Header/Header.scss";
 @import "../../Layout/Footer/Footer.scss";
-@import "../../Product/Product.scss";
-@import "../../Filter/filter.scss";
+@import "../../components/Product/Product.scss";
+@import "../../components/Filter/filter.scss";
 @import "../../Authorization/Signin/signin.scss";
 @import "../../Authorization/Register/register.scss";
-@import "../../Basket/basket.scss";
+@import "../../components/Basket/basket.scss";
 @import "../../admin/pages/Category/Category.scss";
 @import "../../admin/components/Chart/Chart.scss";
 @import "../../admin/components/FeaturedInfo/FeaturedInfo.scss";

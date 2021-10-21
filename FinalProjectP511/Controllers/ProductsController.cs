@@ -14,7 +14,6 @@ namespace FinalProjectP511.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class ProductsController : ControllerBase
     {
         readonly LogoDbContext db;
@@ -22,9 +21,10 @@ namespace FinalProjectP511.Controllers
         {
             this.db = db;
         }
-        [Authorize]
+      
+        [SwaggerOperation("Butun mehsullarin siyahisi")]
         [HttpGet]
-        [SwaggerOperation("Butun Servislerin siyahisi")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
 
@@ -43,9 +43,9 @@ namespace FinalProjectP511.Controllers
             }
             return Ok(data);
         }
-
         [HttpGet("{id:int:min(1)}")]
         [SwaggerOperation("Id-ye gore bir service")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get(int id)
         {
             var data = await db.Products.FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);

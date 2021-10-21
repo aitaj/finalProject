@@ -1,4 +1,4 @@
-import API from "../api/index";
+import API from "../../../api/index";
 import {
   FETCH_PRODUCTS_FAIL,
   FETCH_PRODUCTS_REQUEST,

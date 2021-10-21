@@ -1,4 +1,4 @@
-import API from "../api/index";
+import API from "../../../api/index";
 import {
   FETCH_COMPANIES_FAIL,
   FETCH_COMPANIES_REQUEST,

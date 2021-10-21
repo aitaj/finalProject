@@ -1,5 +1,6 @@
 ﻿using Logo.Application.Models.DataContext;
 using Logo.Application.Models.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -32,6 +33,7 @@ namespace Logo.API.Controllers
 
         [HttpGet("{id:int:min(1)}")]
         [SwaggerOperation("Id-ye gore bir size")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get(int id)
         {
             var data = await db.Sizes.FirstOrDefaultAsync(s => s.Id == id && s.DeletedDate == null);
